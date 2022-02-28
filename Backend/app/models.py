@@ -39,6 +39,9 @@ class Chat(models.Model):
     def __str__(self):
         return self.date
 
+    #Receive_Message
+    #Change status
+
 # Chat History Model
 
 
@@ -49,6 +52,8 @@ class User(models.Model):
 
     def __str__(self):
         return self.username
+
+
 
 # Client Model (inheritance from user to be added)
 class Client(models.Model):
