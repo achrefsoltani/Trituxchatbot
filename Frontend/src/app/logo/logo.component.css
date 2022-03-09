@@ -3,9 +3,8 @@
   block-size: auto;
 }
 .bottom-right {
-  width: 15%;
+  width: 300px;
   position: absolute;
   bottom: 0;
   right: 0;
-
 }

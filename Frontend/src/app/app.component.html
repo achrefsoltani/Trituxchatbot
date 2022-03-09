@@ -1,5 +1,11 @@
-<!--The content below is only a placeholder and can be replaced.-->
 
-    <app-chatbot></app-chatbot>
+<div *ngIf="isShow" (click)="toggleDisplay()">
+  <app-chatbot></app-chatbot>
+</div>
+
+<div (click)="toggleDisplay()" *ngIf="!isShow">
+  <app-logo></app-logo>
+</div>
+
 
 
