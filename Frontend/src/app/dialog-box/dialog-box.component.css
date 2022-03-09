@@ -2,6 +2,9 @@
 .container {
   width: auto;
   height: 70%;
+  padding-top: 5%;
   padding-left: 5%;
+  padding-right: 5%;
   background-color: aliceblue;
+  overflow: auto;
 }
