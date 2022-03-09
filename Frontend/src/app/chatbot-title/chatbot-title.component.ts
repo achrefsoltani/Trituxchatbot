@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, EventEmitter, OnInit, Output} from '@angular/core';
 
 @Component({
   selector: 'app-chatbot-title',
@@ -9,7 +9,14 @@ export class ChatbotTitleComponent implements OnInit {
 
   constructor() { }
 
+ @Output()
+  toggleDisplay: EventEmitter<any> = new EventEmitter<any>();
+
   ngOnInit() {
   }
 
+  Exit() {
+    this.toggleDisplay.emit();
+  }
 }
+

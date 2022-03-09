@@ -1,6 +1,6 @@
 
-<div *ngIf="isShow" (click)="toggleDisplay()">
-  <app-chatbot></app-chatbot>
+<div *ngIf="isShow">
+  <app-chatbot (toggleDisplay)="toggleDisplay()"></app-chatbot>
 </div>
 
 <div (click)="toggleDisplay()" *ngIf="!isShow">
