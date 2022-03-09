@@ -1,0 +1,16 @@
+
+.container {
+  width: auto;
+  height: 20%;
+  padding-left: 5%;
+  display: flex;
+  align-items: center;
+  justify-content: left;
+  background-color: deepskyblue;
+  border-top-right-radius: 30px;
+  border-top-left-radius: 30px;
+}
+
+.title {
+  width: 70%;
+}
