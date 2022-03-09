@@ -1,0 +1,11 @@
+.logo {
+  max-inline-size: 100%;
+  block-size: auto;
+}
+.bottom-right {
+  width: 15%;
+  position: absolute;
+  bottom: 0;
+  right: 0;
+
+}
