@@ -2,16 +2,16 @@ import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 
 import { AppComponent } from './app.component';
-import { ChatbotComponent } from './chatbot/chatbot.component';
-import { LogoComponent } from './logo/logo.component';
-import { ChatbotTabComponent } from './chatbot-tab/chatbot-tab.component';
-import { ChatbotTitleComponent } from './chatbot-title/chatbot-title.component';
-import { DialogBoxComponent } from './dialog-box/dialog-box.component';
-import { ActionsBarComponent } from './actions-bar/actions-bar.component';
-import { ActionIconComponent } from './action-icon/action-icon.component';
-import { MessageComponent } from './message/message.component';
-import { ChoiceListComponent } from './choice-list/choice-list.component';
-import { ChoiceComponent } from './choice/choice.component';
+import { ChatbotComponent } from './components/chatbot/chatbot.component';
+import { LogoComponent } from './components/logo/logo.component';
+import { ChatbotTabComponent } from './components/chatbot-tab/chatbot-tab.component';
+import { ChatbotTitleComponent } from './components/chatbot-title/chatbot-title.component';
+import { DialogBoxComponent } from './components/dialog-box/dialog-box.component';
+import { ActionsBarComponent } from './components/actions-bar/actions-bar.component';
+import { ActionIconComponent } from './components/action-icon/action-icon.component';
+import { MessageComponent } from './components/message/message.component';
+import { ChoiceListComponent } from './components/choice-list/choice-list.component';
+import { ChoiceComponent } from './components/choice/choice.component';
 
 @NgModule({
   declarations: [
