@@ -1,9 +1,11 @@
 
 .container {
   width: auto;
+  display: flex;
   height: 10%;
-  padding-left: 5%;
+  padding: 5%;
   background-color: aliceblue;
   border-bottom-right-radius: 30px;
   border-bottom-left-radius: 30px;
+  gap: 3%;
 }

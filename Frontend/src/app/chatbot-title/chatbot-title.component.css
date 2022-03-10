@@ -1,16 +1,42 @@
 
 .container {
   width: auto;
-  height: 20%;
+  height: 10%;
   padding-left: 5%;
   display: flex;
   align-items: center;
-  justify-content: left;
+  justify-content: space-between;
   background-color: deepskyblue;
   border-top-right-radius: 30px;
   border-top-left-radius: 30px;
 }
 
 .title {
-  width: 70%;
+  width: auto;
+}
+
+.close {
+  position: relative;
+  justify-content: right;
+  width: 32px;
+  height: 32px;
+  opacity: 0.3;
+  padding-right: 20px;
+}
+.close:hover {
+  opacity: 1;
+}
+.close:before, .close:after {
+  position: absolute;
+  left: 15px;
+  content: ' ';
+  height: 33px;
+  width: 2px;
+  background-color: #333;
+}
+.close:before {
+  transform: rotate(45deg);
+}
+.close:after {
+  transform: rotate(-45deg);
 }
