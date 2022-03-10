@@ -15,9 +15,10 @@ class Chatbot(models.Model):
 class Choice(models.Model):
     title_fr = models.CharField(max_length=80, blank=True, null=True)
     title_en = models.CharField(max_length=80, blank=True, null=True)
-    response_fr = models.CharField(max_length=200, blank=True, null=True)
-    response_en = models.CharField(max_length=200, blank=True, null=True)
-    link = models.CharField(max_length=80, blank=True, null=True)
+    response_fr = models.TextField(blank=True, null=True)
+    response_en = models.TextField(blank=True, null=True)
+    link_fr = models.CharField(max_length=200, blank=True, null=True)
+    link_en = models.CharField(max_length=200, blank=True, null=True)
     next_choices = models.ManyToManyField("self",symmetrical=False, related_name="previous_choices", blank=True)
 
     def __str__(self):
