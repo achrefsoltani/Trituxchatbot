@@ -1,7 +1,5 @@
 
 <div class="container">
-  <app-choice></app-choice>
-  <app-choice></app-choice>
-  <app-choice></app-choice>
-  <app-choice></app-choice>
+  <app-choice *ngFor="let choice of choices" [choice]="choice"></app-choice>
+
 </div>
