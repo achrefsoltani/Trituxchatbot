@@ -5,4 +5,5 @@ from .views import (
 
 urlpatterns = [
     path('', ChoiceListApiView.as_view()),
+    path('<int:id>/', ChoiceListApiView.as_view()),
 ]
