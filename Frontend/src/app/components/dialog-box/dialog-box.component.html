@@ -1,12 +1,6 @@
 
 <div class="container" id="style-11" >
-
-    <h1 (click)="answerChoice(firstChoice)">Add</h1>
-
     <app-message [message]="firstChoice.title_en"></app-message>
-    <app-choice-list [choices]="nextChoices"></app-choice-list>
-
-  <ng-template #componentTarget></ng-template>
-
-
+    <app-choice-list [choices]="nextChoices" (answerChoice)="answerChoice($event.choice)"></app-choice-list>
+    <ng-template #componentTarget></ng-template>
 </div>

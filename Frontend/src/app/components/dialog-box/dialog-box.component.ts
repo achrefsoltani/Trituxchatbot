@@ -54,6 +54,7 @@ export class DialogBoxComponent implements OnInit {
       e => choice.next_choices.includes(e.id)
     );
 
+
   }
 
 }

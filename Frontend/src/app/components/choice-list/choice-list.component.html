@@ -1,5 +1,5 @@
 
 <div class="container">
-  <app-choice *ngFor="let choice of choices" [choice]="choice"></app-choice>
+  <app-choice *ngFor="let choice of choices"  [choice]="choice" (click)="AnswerChoice(choice)"></app-choice>
 
 </div>
