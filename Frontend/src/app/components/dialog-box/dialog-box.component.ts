@@ -27,6 +27,7 @@ export class DialogBoxComponent implements OnInit {
   private choiceListFactory: ComponentFactory<ChoiceListComponent>;
 
   @ViewChild('componentTarget', {read: ViewContainerRef, static: false}) target: ViewContainerRef;
+  @ViewChild('scrolldiv', {static: false}) scrolldiv: any;
 
   constructor(private choiceService: ChoiceService, private componentFactoryResolver: ComponentFactoryResolver) { }
 
@@ -39,6 +40,8 @@ export class DialogBoxComponent implements OnInit {
 
     this.messageFactory = this.componentFactoryResolver.resolveComponentFactory(MessageComponent);
     this.choiceListFactory = this.componentFactoryResolver.resolveComponentFactory(ChoiceListComponent);
+
+
   }
 
   public answerChoice(choice: Choice): void {
@@ -47,7 +50,7 @@ export class DialogBoxComponent implements OnInit {
     const target = this.target;
 
     const MessageComponentRef = target.createComponent(messagefactory);
-    MessageComponentRef.instance.message = choice.title_en;
+    MessageComponentRef.instance.message = choice.response_fr;
 
     const ChoiceListComponentRef = target.createComponent(choiceListFactory);
     ChoiceListComponentRef.instance.choices = this.choices.filter(
@@ -56,8 +59,11 @@ export class DialogBoxComponent implements OnInit {
     ChoiceListComponentRef.instance.answerChoice.subscribe($event => {
       this.answerChoice($event.choice);
     });
-
-
   }
+
+  private scrollBottom() {
+    this.scrolldiv.nativeElement.scrollTop = this.scrolldiv.nativeElement.scrollHeight;
+  }
+
 
 }

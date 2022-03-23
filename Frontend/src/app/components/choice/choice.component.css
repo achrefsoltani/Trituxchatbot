@@ -1,7 +1,11 @@
 
 .container {
-  margin: 10px;
+  margin-left: 10px;
+  margin-right: 10px;
+  margin-bottom: 60px;
+  margin-top: 30px;
   padding: 5px;
   background-color: deepskyblue;
   border-radius: 15px;
+  width: 20%;
 }

@@ -1,7 +1,9 @@
 
 .container {
   width: auto;
-  display: flex;
+  height: auto;
+  margin-top: 10px;
+  margin-bottom: 10px;
   justify-content: center;
-  overflow: hidden;
+  line-height: 200%;
 }
