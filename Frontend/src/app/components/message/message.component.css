@@ -1,5 +1,7 @@
 
 .container {
+  margin-top: 10px;
+  margin-bottom: 10px;
   background-color: azure;
   border-radius: 5px;
   padding: 5px;

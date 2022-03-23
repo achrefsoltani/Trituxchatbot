@@ -49,16 +49,22 @@ export class DialogBoxComponent implements OnInit {
     const choiceListFactory = this.choiceListFactory;
     const target = this.target;
 
-    const MessageComponentRef = target.createComponent(messagefactory);
-    MessageComponentRef.instance.message = choice.response_fr;
+    if (choice.response_fr !== '') {
+      const MessageComponentRef = target.createComponent(messagefactory);
+      MessageComponentRef.instance.message = choice.response_fr;
+    }
 
-    const ChoiceListComponentRef = target.createComponent(choiceListFactory);
-    ChoiceListComponentRef.instance.choices = this.choices.filter(
-      e => choice.next_choices.includes(e.id)
-    );
-    ChoiceListComponentRef.instance.answerChoice.subscribe($event => {
-      this.answerChoice($event.choice);
-    });
+    if (choice.next_choices && choice.next_choices.length) {
+      const ChoiceListComponentRef = target.createComponent(choiceListFactory);
+      ChoiceListComponentRef.instance.choices = this.choices.filter(
+        e => choice.next_choices.includes(e.id)
+      );
+      ChoiceListComponentRef.instance.answerChoice.subscribe($event => {
+        this.answerChoice($event.choice);
+      });
+    }
+
+
   }
 
   private scrollBottom() {
