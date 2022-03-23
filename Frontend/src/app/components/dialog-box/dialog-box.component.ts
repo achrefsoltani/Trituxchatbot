@@ -53,6 +53,9 @@ export class DialogBoxComponent implements OnInit {
     ChoiceListComponentRef.instance.choices = this.choices.filter(
       e => choice.next_choices.includes(e.id)
     );
+    ChoiceListComponentRef.instance.answerChoice.subscribe($event => {
+      this.answerChoice($event.choice);
+    });
 
 
   }
