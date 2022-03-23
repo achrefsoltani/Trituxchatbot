@@ -10,6 +10,7 @@ import {Choice} from '../../models/choice';
 import {ChoiceService} from '../../services/choice.service';
 import {MessageComponent} from '../message/message.component';
 import {ChoiceListComponent} from '../choice-list/choice-list.component';
+import {element} from "protractor";
 
 
 @Component({
@@ -40,14 +41,18 @@ export class DialogBoxComponent implements OnInit {
     this.choiceListFactory = this.componentFactoryResolver.resolveComponentFactory(ChoiceListComponent);
   }
 
-  public answerChoice(): void {
+  public answerChoice(choice: Choice): void {
     const messagefactory = this.messageFactory;
     const choiceListFactory = this.choiceListFactory;
     const target = this.target;
+
     const MessageComponentRef = target.createComponent(messagefactory);
-    MessageComponentRef.instance.message = 'Test';
+    MessageComponentRef.instance.message = choice.title_en;
+
     const ChoiceListComponentRef = target.createComponent(choiceListFactory);
-    ChoiceListComponentRef.instance.choices = this.nextChoices;
+    ChoiceListComponentRef.instance.choices = this.choices.filter(
+      e => choice.next_choices.includes(e.id)
+    );
 
   }
 
