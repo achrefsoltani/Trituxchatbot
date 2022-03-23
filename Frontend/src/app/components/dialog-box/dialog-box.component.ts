@@ -1,6 +1,16 @@
-import {Component, OnInit} from '@angular/core';
+import {
+  Component,
+  ComponentFactory,
+  ComponentFactoryResolver,
+  OnInit,
+  ViewChild,
+  ViewContainerRef
+} from '@angular/core';
 import {Choice} from '../../models/choice';
 import {ChoiceService} from '../../services/choice.service';
+import {MessageComponent} from '../message/message.component';
+import {ChoiceListComponent} from '../choice-list/choice-list.component';
+
 
 @Component({
   selector: 'app-dialog-box',
@@ -12,8 +22,12 @@ export class DialogBoxComponent implements OnInit {
   firstChoice: Choice ;
   nextChoices: Choice[];
 
+  private messageFactory: ComponentFactory<MessageComponent>;
+  private choiceListFactory: ComponentFactory<ChoiceListComponent>;
 
-  constructor(private choiceService: ChoiceService) { }
+  @ViewChild('componentTarget', {read: ViewContainerRef, static: false}) target: ViewContainerRef;
+
+  constructor(private choiceService: ChoiceService, private componentFactoryResolver: ComponentFactoryResolver) { }
 
   ngOnInit() {
     this.choiceService.getChoices().subscribe((choices) => {
@@ -22,7 +36,19 @@ export class DialogBoxComponent implements OnInit {
       this.nextChoices = choices.filter(element => this.firstChoice.next_choices.includes(element.id));
     });
 
-    console.log(this.firstChoice);
+    this.messageFactory = this.componentFactoryResolver.resolveComponentFactory(MessageComponent);
+    this.choiceListFactory = this.componentFactoryResolver.resolveComponentFactory(ChoiceListComponent);
+  }
+
+  public answerChoice(): void {
+    const messagefactory = this.messageFactory;
+    const choiceListFactory = this.choiceListFactory;
+    const target = this.target;
+    const MessageComponentRef = target.createComponent(messagefactory);
+    MessageComponentRef.instance.message = 'Test';
+    const ChoiceListComponentRef = target.createComponent(choiceListFactory);
+    ChoiceListComponentRef.instance.choices = this.nextChoices;
+
   }
 
 }

@@ -32,6 +32,10 @@ import { ChoiceComponent } from './components/choice/choice.component';
     BrowserModule,
     HttpClientModule
   ],
+  entryComponents: [
+    MessageComponent,
+    ChoiceListComponent,
+  ],
   providers: [],
   bootstrap: [AppComponent]
 })
