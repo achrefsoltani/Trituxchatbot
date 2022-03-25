@@ -1,4 +1,5 @@
 import {
+  AfterViewChecked,
   Component,
   ComponentFactory,
   ComponentFactoryResolver,
@@ -18,9 +19,9 @@ import {ChoiceListComponent} from '../choice-list/choice-list.component';
   templateUrl: './dialog-box.component.html',
   styleUrls: ['./dialog-box.component.css']
 })
-export class DialogBoxComponent implements OnInit {
-  choices: Choice[] = [];
-  firstChoice: Choice = {
+export class DialogBoxComponent implements OnInit, AfterViewChecked {
+  public choices: Choice[] = [];
+  public firstChoice: Choice = {
     link_en: '',
     link_fr: '',
     next_choices: [],
@@ -31,8 +32,8 @@ export class DialogBoxComponent implements OnInit {
     title_fr: ''
 
   };
-  nextChoices: Choice[];
-  selectedChoices: Choice[] = [];
+  public nextChoices: Choice[];
+  public selectedChoices: Choice[] = [];
 
   private messageFactory: ComponentFactory<MessageComponent>;
   private choiceListFactory: ComponentFactory<ChoiceListComponent>;
@@ -56,6 +57,10 @@ export class DialogBoxComponent implements OnInit {
 
 
 
+  }
+
+  ngAfterViewChecked() {
+    this.scrollBottom();
   }
 
   public answerChoice(choice: Choice): void {
@@ -91,23 +96,19 @@ export class DialogBoxComponent implements OnInit {
 
   }
 
-  public previousChoice() {
-    if ((this.selectedChoices.length) > 2) {
-      const choiceListFactory = this.choiceListFactory;
-      const target = this.target;
+  public previousChoice2() {
+    if ((this.selectedChoices.length) >= 2) {
       this.selectedChoices.pop();
       const choice = this.selectedChoices[this.selectedChoices.length - 1];
-
-      if (choice.next_choices && choice.next_choices.length) {
-      const ChoiceListComponentRef = target.createComponent(choiceListFactory);
-      ChoiceListComponentRef.instance.choices = this.choices.filter(
-        e => choice.next_choices.includes(e.id)
-      );
-      ChoiceListComponentRef.instance.answerChoice.subscribe($event => {
-        this.answerChoice($event.choice);
-      });
+      this.answerChoice(choice);
     }
+  }
 
+  public previousChoice() {
+    if ((this.selectedChoices.length) > 1 ) {
+      const previousChoiceId = this.selectedChoices[this.selectedChoices.length - 1].previous_choices[0];
+      const previousChoice = this.choices.find(i => i.id === previousChoiceId);
+      this.answerChoice(previousChoice);
     }
   }
 
