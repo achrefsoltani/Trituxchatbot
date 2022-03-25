@@ -47,6 +47,7 @@ export class DialogBoxComponent implements OnInit {
       this.choices = choices;
       this.firstChoice = choices.find(i => i.id === 25);
       this.nextChoices = choices.filter(element => this.firstChoice.next_choices.includes(element.id));
+      this.selectedChoices.push(this.firstChoice);
     });
 
 
@@ -90,7 +91,27 @@ export class DialogBoxComponent implements OnInit {
 
   }
 
-  private scrollBottom() {
+  public previousChoice() {
+    if ((this.selectedChoices.length) > 2) {
+      const choiceListFactory = this.choiceListFactory;
+      const target = this.target;
+      this.selectedChoices.pop();
+      const choice = this.selectedChoices[this.selectedChoices.length - 1];
+
+      if (choice.next_choices && choice.next_choices.length) {
+      const ChoiceListComponentRef = target.createComponent(choiceListFactory);
+      ChoiceListComponentRef.instance.choices = this.choices.filter(
+        e => choice.next_choices.includes(e.id)
+      );
+      ChoiceListComponentRef.instance.answerChoice.subscribe($event => {
+        this.answerChoice($event.choice);
+      });
+    }
+
+    }
+  }
+
+  public scrollBottom() {
     this.scrolldiv.nativeElement.scrollTop = this.scrolldiv.nativeElement.scrollHeight;
   }
 

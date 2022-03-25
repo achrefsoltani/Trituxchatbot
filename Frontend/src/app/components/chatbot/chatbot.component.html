@@ -3,6 +3,6 @@
   <div class="chatbot">
     <app-chatbot-title (toggleDisplay)="Exit()"></app-chatbot-title>
     <app-dialog-box></app-dialog-box>
-    <app-actions-bar></app-actions-bar>
+    <app-actions-bar (back)='previousChoice()'></app-actions-bar>
   </div>
 </div>

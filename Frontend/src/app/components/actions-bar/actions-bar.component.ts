@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, EventEmitter, OnInit, Output} from '@angular/core';
 
 @Component({
   selector: 'app-actions-bar',
@@ -9,7 +9,14 @@ export class ActionsBarComponent implements OnInit {
 
   constructor() { }
 
+  @Output()
+  back: EventEmitter<any> = new EventEmitter<any>();
+
   ngOnInit() {
+  }
+
+  public previous() {
+    this.back.emit();
   }
 
 }

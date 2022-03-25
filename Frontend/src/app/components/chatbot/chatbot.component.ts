@@ -1,4 +1,5 @@
-import {Component, EventEmitter, OnInit, Output} from '@angular/core';
+import {Component, EventEmitter, OnInit, Output, ViewChild} from '@angular/core';
+import {DialogBoxComponent} from "../dialog-box/dialog-box.component";
 
 @Component({
   selector: 'app-chatbot',
@@ -6,6 +7,7 @@ import {Component, EventEmitter, OnInit, Output} from '@angular/core';
   styleUrls: ['./chatbot.component.css']
 })
 export class ChatbotComponent implements OnInit {
+  @ViewChild(DialogBoxComponent, {static: false}) dialog: DialogBoxComponent;
 
   constructor() { }
 
@@ -15,8 +17,13 @@ export class ChatbotComponent implements OnInit {
   ngOnInit() {
   }
 
-  Exit() {
+  private Exit() {
     this.toggleDisplay.emit();
   }
+
+  private previousChoice() {
+    this.dialog.previousChoice();
+  }
+
 
 }
