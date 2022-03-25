@@ -10,7 +10,7 @@ import {Choice} from '../../models/choice';
 import {ChoiceService} from '../../services/choice.service';
 import {MessageComponent} from '../message/message.component';
 import {ChoiceListComponent} from '../choice-list/choice-list.component';
-import {element} from "protractor";
+
 
 
 @Component({
@@ -20,8 +20,19 @@ import {element} from "protractor";
 })
 export class DialogBoxComponent implements OnInit {
   choices: Choice[] = [];
-  firstChoice: Choice ;
+  firstChoice: Choice = {
+    link_en: '',
+    link_fr: '',
+    next_choices: [],
+    previous_choices: [],
+    response_en: '',
+    response_fr: '',
+    title_en: '',
+    title_fr: ''
+
+  };
   nextChoices: Choice[];
+  selectedChoices: Choice[] = [];
 
   private messageFactory: ComponentFactory<MessageComponent>;
   private choiceListFactory: ComponentFactory<ChoiceListComponent>;
@@ -38,20 +49,32 @@ export class DialogBoxComponent implements OnInit {
       this.nextChoices = choices.filter(element => this.firstChoice.next_choices.includes(element.id));
     });
 
+
     this.messageFactory = this.componentFactoryResolver.resolveComponentFactory(MessageComponent);
     this.choiceListFactory = this.componentFactoryResolver.resolveComponentFactory(ChoiceListComponent);
+
 
 
   }
 
   public answerChoice(choice: Choice): void {
+    this.selectedChoices.push(choice);
+    console.log(this.selectedChoices);
+
     const messagefactory = this.messageFactory;
     const choiceListFactory = this.choiceListFactory;
     const target = this.target;
 
+    if (choice.title_fr !== '') {
+      const MessageComponentRef = target.createComponent(messagefactory);
+      MessageComponentRef.instance.message = choice.title_fr;
+      MessageComponentRef.instance.css = 'client';
+    }
+
     if (choice.response_fr !== '') {
       const MessageComponentRef = target.createComponent(messagefactory);
       MessageComponentRef.instance.message = choice.response_fr;
+      MessageComponentRef.instance.css = 'chatbot';
     }
 
     if (choice.next_choices && choice.next_choices.length) {
