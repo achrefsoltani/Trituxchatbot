@@ -1,10 +1,10 @@
 
-<div *ngIf="isShow">
+<div [hidden]="!isShow">
   <app-chatbot (toggleDisplay)="toggleDisplay()"></app-chatbot>
 </div>
 
-<div (click)="toggleDisplay()" *ngIf="!isShow">
-  <app-logo></app-logo>
+<div [hidden]="isShow">
+  <app-logo (click)="toggleDisplay()"></app-logo>
 </div>
 
 
