@@ -7,7 +7,7 @@ import {Choice} from '../models/choice';
   providedIn: 'root'
 })
 export class ChoiceService {
-  private apiUrl = 'http://127.0.0.1:8000/app/api/';
+  private apiUrl = 'http://127.0.0.1:8000/app/api/choices/';
 
   constructor(private http: HttpClient) {
   }
