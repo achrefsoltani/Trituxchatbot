@@ -11,6 +11,8 @@ import {Choice} from '../../models/choice';
 import {ChoiceService} from '../../services/choice.service';
 import {MessageComponent} from '../message/message.component';
 import {ChoiceListComponent} from '../choice-list/choice-list.component';
+import {Chat} from '../../models/chat';
+import {ChatService} from "../../services/chat.service";
 
 
 
@@ -34,6 +36,9 @@ export class DialogBoxComponent implements OnInit, AfterViewChecked {
   };
   public nextChoices: Choice[];
   public selectedChoices: Choice[] = [];
+  private chat: Chat = {
+      language : 'fr',
+    };
 
   private messageFactory: ComponentFactory<MessageComponent>;
   private choiceListFactory: ComponentFactory<ChoiceListComponent>;
@@ -41,7 +46,9 @@ export class DialogBoxComponent implements OnInit, AfterViewChecked {
   @ViewChild('componentTarget', {read: ViewContainerRef, static: false}) target: ViewContainerRef;
   @ViewChild('scrolldiv', {static: false}) scrolldiv: any;
 
-  constructor(private choiceService: ChoiceService, private componentFactoryResolver: ComponentFactoryResolver) { }
+  constructor(private choiceService: ChoiceService,
+              private chatService: ChatService ,
+              private componentFactoryResolver: ComponentFactoryResolver) { }
 
   ngOnInit() {
     this.choiceService.getChoices().subscribe((choices) => {
@@ -54,6 +61,9 @@ export class DialogBoxComponent implements OnInit, AfterViewChecked {
 
     this.messageFactory = this.componentFactoryResolver.resolveComponentFactory(MessageComponent);
     this.choiceListFactory = this.componentFactoryResolver.resolveComponentFactory(ChoiceListComponent);
+
+
+    this.chatService.addChat(this.chat).subscribe((c) => (this.chat = c) );
 
 
 
@@ -115,6 +125,8 @@ export class DialogBoxComponent implements OnInit, AfterViewChecked {
   public scrollBottom() {
     this.scrolldiv.nativeElement.scrollTop = this.scrolldiv.nativeElement.scrollHeight;
   }
+
+
 
 
 }
