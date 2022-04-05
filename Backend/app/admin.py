@@ -12,7 +12,7 @@ class ChoiceAdmin(admin.ModelAdmin):
 
 @admin.register(Message)
 class MessageAdmin(admin.ModelAdmin):
-    list_display = ('sender','type','content','choice_id','date')
+    list_display = ('sender','type','content','choice_id','date','chat')
 
 
 class MessageInlineAdmin(admin.TabularInline):
