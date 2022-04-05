@@ -41,7 +41,7 @@ class Chat(models.Model):
     language = models.CharField(max_length=2, choices=[('fr','Francais'),('en','English')], null=True)
     date = models.DateTimeField(auto_now_add= True, null=True)
     #chatbot = models.CharField(max_length=80, blank=True, null=True)
-    #user = models.CharField(max_length=80, blank=True, null=True)
+    user = models.CharField(max_length=80, blank=True, null=True)
     #user_feedback = models.CharField(max_length=80, blank=True, null=True)
     #status = models.CharField(max_length=80, blank=True, null=True)
 

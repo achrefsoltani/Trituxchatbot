@@ -1,3 +1,4 @@
+/* tslint:disable:one-line */
 import {
   AfterViewChecked,
   Component,
@@ -45,6 +46,7 @@ export class DialogBoxComponent implements OnInit, AfterViewChecked {
   // Extract language from website not yet implemented
   private chat: Chat = {
       language : 'fr',
+      user : 'Not logged in'
     };
 
   @ViewChild('componentTarget', {read: ViewContainerRef, static: false}) target: ViewContainerRef;
@@ -120,11 +122,16 @@ export class DialogBoxComponent implements OnInit, AfterViewChecked {
   }
 
   public previousChoice() {
-    if ((this.selectedChoices.length) > 1 ) {
+    try {
+      if ((this.selectedChoices.length) > 1 ) {
       const previousChoiceId = this.selectedChoices[this.selectedChoices.length - 1].previous_choices[0];
       const previousChoice = this.choices.find(i => i.id === previousChoiceId);
       this.answerChoice(previousChoice);
+      }
+    } catch (e) {
+      console.log(e);
     }
+
   }
 
   public scrollBottom() {
