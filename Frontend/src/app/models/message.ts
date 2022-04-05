@@ -2,7 +2,7 @@ import {Chat} from './chat';
 
 export interface Message {
   sender: string;
-  chat: Chat;
+  chat: number;
   type: string;
   content?: string;
   choice_id?: number;

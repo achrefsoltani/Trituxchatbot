@@ -12,8 +12,9 @@ import {ChoiceService} from '../../services/choice.service';
 import {MessageComponent} from '../message/message.component';
 import {ChoiceListComponent} from '../choice-list/choice-list.component';
 import {Chat} from '../../models/chat';
-import {ChatService} from "../../services/chat.service";
-import {MessageService} from "../../services/message.service";
+import {Message} from '../../models/message';
+import {ChatService} from '../../services/chat.service';
+import {MessageService} from '../../services/message.service';
 
 
 
@@ -23,6 +24,7 @@ import {MessageService} from "../../services/message.service";
   styleUrls: ['./dialog-box.component.css']
 })
 export class DialogBoxComponent implements OnInit, AfterViewChecked {
+
   public choices: Choice[] = [];
   public firstChoice: Choice = {
     link_en: '',
@@ -37,18 +39,20 @@ export class DialogBoxComponent implements OnInit, AfterViewChecked {
   };
   public nextChoices: Choice[];
   public selectedChoices: Choice[] = [];
+  private messageFactory: ComponentFactory<MessageComponent>;
+  private choiceListFactory: ComponentFactory<ChoiceListComponent>;
+
+  // Extract language from website not yet implemented
   private chat: Chat = {
       language : 'fr',
     };
-
-  private messageFactory: ComponentFactory<MessageComponent>;
-  private choiceListFactory: ComponentFactory<ChoiceListComponent>;
 
   @ViewChild('componentTarget', {read: ViewContainerRef, static: false}) target: ViewContainerRef;
   @ViewChild('scrolldiv', {static: false}) scrolldiv: any;
 
   constructor(private choiceService: ChoiceService,
               private chatService: ChatService,
+              private messageService: MessageService,
               private componentFactoryResolver: ComponentFactoryResolver) { }
 
   ngOnInit() {
@@ -72,12 +76,19 @@ export class DialogBoxComponent implements OnInit, AfterViewChecked {
 
   ngAfterViewChecked() {
     this.scrollBottom();
-    console.log('view checked');
   }
 
   public answerChoice(choice: Choice): void {
+    const m = {
+      sender: 'user',
+      type: 'choice',
+      chat: this.chat.id,
+      choice_id: choice.id,
+    };
+    this.messageService.addMessage(m).subscribe();
     this.selectedChoices.push(choice);
-    console.log(this.selectedChoices);
+
+
 
     const messagefactory = this.messageFactory;
     const choiceListFactory = this.choiceListFactory;
@@ -107,8 +118,6 @@ export class DialogBoxComponent implements OnInit, AfterViewChecked {
 
 
   }
-
-
 
   public previousChoice() {
     if ((this.selectedChoices.length) > 1 ) {
