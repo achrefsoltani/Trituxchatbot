@@ -13,6 +13,7 @@ import {MessageComponent} from '../message/message.component';
 import {ChoiceListComponent} from '../choice-list/choice-list.component';
 import {Chat} from '../../models/chat';
 import {ChatService} from "../../services/chat.service";
+import {MessageService} from "../../services/message.service";
 
 
 
@@ -47,7 +48,7 @@ export class DialogBoxComponent implements OnInit, AfterViewChecked {
   @ViewChild('scrolldiv', {static: false}) scrolldiv: any;
 
   constructor(private choiceService: ChoiceService,
-              private chatService: ChatService ,
+              private chatService: ChatService,
               private componentFactoryResolver: ComponentFactoryResolver) { }
 
   ngOnInit() {
@@ -71,6 +72,7 @@ export class DialogBoxComponent implements OnInit, AfterViewChecked {
 
   ngAfterViewChecked() {
     this.scrollBottom();
+    console.log('view checked');
   }
 
   public answerChoice(choice: Choice): void {
@@ -106,13 +108,7 @@ export class DialogBoxComponent implements OnInit, AfterViewChecked {
 
   }
 
-  public previousChoice2() {
-    if ((this.selectedChoices.length) >= 2) {
-      this.selectedChoices.pop();
-      const choice = this.selectedChoices[this.selectedChoices.length - 1];
-      this.answerChoice(choice);
-    }
-  }
+
 
   public previousChoice() {
     if ((this.selectedChoices.length) > 1 ) {
