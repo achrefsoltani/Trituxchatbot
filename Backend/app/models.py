@@ -3,7 +3,7 @@ from django.db import models
 # Chatbot Model
 class Chatbot(models.Model):
     name = models.CharField(max_length=80, blank=True, null=True)
-    language = models.CharField(max_length=80, blank=True, null=True)
+    language = models.CharField(max_length=2, choices=[('fr','Francais'),('en','English')])
 
     def __str__(self):
         return self.name
@@ -24,21 +24,29 @@ class Choice(models.Model):
     def __str__(self):
         return self.title_en
 
+# Message Model
+class Message(models.Model):
+    sender = models.CharField(max_length=7,choices=[('chatbot','Chatbot'),('user','User')], null=True)
+    chat = models.ForeignKey('Chat', on_delete=models.CASCADE, related_name='messages', null=True)
+    type = models.CharField(max_length=6,choices=[('text','Text'),('choice','Choice')], null=True)
+    content = models.TextField(blank=True, null=True)
+    choice_id = models.IntegerField(blank=True, null=True)
+    date = models.DateTimeField(auto_now_add= True, null=True)
 
+    def __str__(self):
+        return 'Message sent on :' + str(self.date)
 
 # Chat Model
 class Chat(models.Model):
-    language = models.CharField(max_length=80, blank=True, null=True)
-    date = models.CharField(max_length=80, blank=True, null=True)
-    chatbot = models.CharField(max_length=80, blank=True, null=True)
-    chatbot_messages = models.CharField(max_length=80, blank=True, null=True)
-    user = models.CharField(max_length=80, blank=True, null=True)
-    user_messages = models.CharField(max_length=80, blank=True, null=True)
-    user_feedback = models.CharField(max_length=80, blank=True, null=True)
-    status = models.CharField(max_length=80, blank=True, null=True)
+    language = models.CharField(max_length=2, choices=[('fr','Francais'),('en','English')], null=True)
+    date = models.DateTimeField(auto_now_add= True, null=True)
+    #chatbot = models.CharField(max_length=80, blank=True, null=True)
+    #user = models.CharField(max_length=80, blank=True, null=True)
+    #user_feedback = models.CharField(max_length=80, blank=True, null=True)
+    #status = models.CharField(max_length=80, blank=True, null=True)
 
     def __str__(self):
-        return self.date
+        return 'Chat started on :' + str(self.date)
 
     #Receive_Message
     #Change status

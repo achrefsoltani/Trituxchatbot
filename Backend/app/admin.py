@@ -1,13 +1,28 @@
 from django.contrib import admin
-from .models import Choice,Chat,User,Client,Chatbot
+from .models import Choice,Chat,Message
 
 # Register your models here.
+
+
+
+
 @admin.register(Choice)
 class ChoiceAdmin(admin.ModelAdmin):
     list_display = ("title_en","title_fr","response_fr")
 
-admin.site.register(Chat)
-admin.site.register(User)
-admin.site.register(Client)
-admin.site.register(Chatbot)
+@admin.register(Message)
+class MessageAdmin(admin.ModelAdmin):
+    list_display = ('sender','type','content','choice_id','date')
+
+
+class MessageInlineAdmin(admin.TabularInline):
+    model = Message
+    readonly_fields = ['sender','chat','type','content','choice_id','date']
+    extra = 0
+
+@admin.register(Chat)
+class ChatAdmin(admin.ModelAdmin):
+    list_display = ('date','language')
+    inlines = [MessageInlineAdmin]
+    readonly_fields = ['date','language']
 
