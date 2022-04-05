@@ -44,8 +44,9 @@ export class DialogBoxComponent implements OnInit, AfterViewChecked {
   private choiceListFactory: ComponentFactory<ChoiceListComponent>;
 
   // Extract language from website not yet implemented
+  private language = 'en';
   private chat: Chat = {
-      language : 'fr',
+      language : this.language,
       user : 'Not logged in'
     };
 
@@ -96,16 +97,31 @@ export class DialogBoxComponent implements OnInit, AfterViewChecked {
     const choiceListFactory = this.choiceListFactory;
     const target = this.target;
 
-    if (choice.title_fr !== '') {
-      const MessageComponentRef = target.createComponent(messagefactory);
-      MessageComponentRef.instance.message = choice.title_fr;
-      MessageComponentRef.instance.css = 'client';
-    }
+    if (this.language === 'fr') {
+      if (choice.title_fr !== '') {
+        const MessageComponentRef = target.createComponent(messagefactory);
+        MessageComponentRef.instance.message = choice.title_fr;
+        MessageComponentRef.instance.css = 'client';
+      }
 
-    if (choice.response_fr !== '') {
-      const MessageComponentRef = target.createComponent(messagefactory);
-      MessageComponentRef.instance.message = choice.response_fr;
-      MessageComponentRef.instance.css = 'chatbot';
+      if (choice.response_fr !== '') {
+        const MessageComponentRef = target.createComponent(messagefactory);
+        MessageComponentRef.instance.message = choice.response_fr;
+        MessageComponentRef.instance.css = 'chatbot';
+      }
+    }
+    else if (this.language === 'en') {
+      if (choice.title_en !== '') {
+        const MessageComponentRef = target.createComponent(messagefactory);
+        MessageComponentRef.instance.message = choice.title_en;
+        MessageComponentRef.instance.css = 'client';
+      }
+
+      if (choice.response_en !== '') {
+        const MessageComponentRef = target.createComponent(messagefactory);
+        MessageComponentRef.instance.message = choice.response_en;
+        MessageComponentRef.instance.css = 'chatbot';
+      }
     }
 
     if (choice.next_choices && choice.next_choices.length) {
