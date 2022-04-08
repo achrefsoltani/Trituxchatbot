@@ -2,10 +2,10 @@
 .container {
   width: auto;
   display: flex;
-  height: 10%;
-  padding: 5%;
+  height: auto;
+  padding: 1%;
   background-color: aliceblue;
   border-bottom-right-radius: 30px;
   border-bottom-left-radius: 30px;
-  gap: 3%;
+  gap : 5%;
 }

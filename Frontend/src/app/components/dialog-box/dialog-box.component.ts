@@ -44,7 +44,7 @@ export class DialogBoxComponent implements OnInit, AfterViewChecked {
   private choiceListFactory: ComponentFactory<ChoiceListComponent>;
 
   // Extract language from website not yet implemented
-  private language = 'en';
+  private language = 'fr';
   private chat: Chat = {
       language : this.language,
       user : 'Not logged in'

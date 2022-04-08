@@ -1,21 +1,10 @@
-.bottom-right {
+.side-panel {
   width: 400px;
-  height: 75%;
+  height: 80%;
   position: absolute;
   bottom: 1%;
-  right: 5%;
+  right: 1%;
 
 }
 
-.chatbot {
-  width: auto;
-  height: 90%;
-  margin-bottom: 10%;
-  margin-right: 10%;
-  border-radius: 15%;
-}
 
-.logo {
-  max-inline-size: 100%;
-  block-size: auto;
-}
