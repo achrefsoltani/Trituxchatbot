@@ -1,20 +1,8 @@
 
 
 <h1>Base html</h1>
-<table border="black">
-    <tr>
-        <td>Choice</td>
-        <td>Previous Choice</td>
-        <td>Next Choices</td>
-    </tr>
-    {% for choice in choices %}
-    <tr>
-        <td>{{ choice.title_en }}</td>
-        <td>{%for pc in choice.previous_choices.values %}{{ pc.title_en }}<br>{% endfor %}</td>
-        <td>{%for nc in choice.next_choices.values %}{{ nc.title_en }}<br>{% endfor %}</td>
-    </tr>
-    {% endfor %}
-</table>
+
 
 {% block content %}
+    {{ df | safe }}
 {% endblock %}
