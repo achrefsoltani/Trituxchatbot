@@ -2,16 +2,25 @@ from django.shortcuts import render
 from .models import Chat,Message,Choice
 import pandas as pd
 
+import plotly.express as px
 
 
 
 def main_view(request):
+    #bar chart
     df = create_df()
+    d = df['choice'].value_counts().rename_axis('choice').reset_index(name='counts')
+    fig = px.bar(d, x=d['choice'], y=d['counts'])
+    chart = fig.to_html()
+
+
 
     context = {
-        "df": df.to_html()
+        'chart': chart
     }
-    return render(request, 'base.html' , context)
+
+    return render(request, 'home/index.html' , context=context)
+
 
 
 def create_df():
@@ -30,9 +39,28 @@ def create_df():
                        'choice_id': 'choice'},
               inplace=True)
 
-    df['choice'] = df['choice'].map(lambda x : Choice.objects.get(id=x))
+    df['choice'] = df['choice'].map(lambda x : Choice.objects.get(id=x).title_en)
+
 
     return df
+
+def chart(request):
+    df = create_df()
+
+    d = df['choice'].value_counts().rename_axis('choice').reset_index(name='counts')
+
+
+
+    fig = px.bar(d, x=d['choice'], y=d['counts'])
+
+    chart = fig.to_html()
+
+    context ={'chart': chart}
+
+    return render(request, 'bar_chart.html', context=context)
+
+
+
 
 
 
