@@ -1,22 +1,49 @@
 from django.shortcuts import render
 from .models import Chat,Message,Choice
 import pandas as pd
-
+import datetime
 import plotly.express as px
 
 
 
 def main_view(request):
+
     #bar chart
     df = create_df()
     d = df['choice'].value_counts().rename_axis('choice').reset_index(name='counts')
     fig = px.bar(d, x=d['choice'], y=d['counts'])
-    chart = fig.to_html()
+    barchart = fig.to_html()
+
+    # Total Interactions
+    totalInt = df['chat_id'].count()
+    today = datetime.date.today()
+    past7 = today - datetime.timedelta(days=7)
+    df["chat_start"] = pd.to_datetime(df["chat_start"]).dt.tz_localize(None)
+    df["chat_date"] = df['chat_start'].dt.date
+    df_filtered = df[(df['chat_date'] >= past7) & (df['chat_date'] <= today)]
+    weekInt = len(df_filtered)
+
+    # Language
+    frenchIntTotal = len(df[df['language']=='fr'])
+    englishIntTotal = len(df[df['language']=='en'])
+    frenchIntWeek = len(df_filtered[df_filtered['language'] == 'fr'])
+    englishIntWeek = len(df_filtered[df_filtered['language'] == 'en'])
 
 
+    # Avg messages
+
+    davg = df['chat_id'].value_counts().rename_axis('chat_id').reset_index(name='counts')
+    avgMsg = round(davg['counts'].mean())
 
     context = {
-        'chart': chart
+        'barchart': barchart,
+        'totalInt': totalInt,
+        'weekInt': weekInt,
+        'frenchInt': frenchIntTotal,
+        'englishInt': englishIntTotal,
+        'frenchIntWeek': frenchIntWeek,
+        'englishIntWeek': englishIntWeek,
+        'avgMessages' : avgMsg
     }
 
     return render(request, 'home/index.html' , context=context)
@@ -44,20 +71,7 @@ def create_df():
 
     return df
 
-def chart(request):
-    df = create_df()
 
-    d = df['choice'].value_counts().rename_axis('choice').reset_index(name='counts')
-
-
-
-    fig = px.bar(d, x=d['choice'], y=d['counts'])
-
-    chart = fig.to_html()
-
-    context ={'chart': chart}
-
-    return render(request, 'bar_chart.html', context=context)
 
 
 
