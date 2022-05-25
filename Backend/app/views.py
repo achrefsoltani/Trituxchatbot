@@ -1,14 +1,12 @@
 from django.shortcuts import render
-from .models import Chat,Message,Choice
+from .models import Chat, Message, Choice
 import pandas as pd
 import datetime
 import plotly.express as px
 
 
-
 def main_view(request):
-
-    #bar chart
+    # Choices bar chart
     df = create_df()
     d = df['choice'].value_counts().rename_axis('choice').reset_index(name='counts')
     fig = px.bar(d, x=d['choice'], y=d['counts'])
@@ -24,11 +22,10 @@ def main_view(request):
     weekInt = len(df_filtered)
 
     # Language
-    frenchIntTotal = len(df[df['language']=='fr'])
-    englishIntTotal = len(df[df['language']=='en'])
+    frenchIntTotal = len(df[df['language'] == 'fr'])
+    englishIntTotal = len(df[df['language'] == 'en'])
     frenchIntWeek = len(df_filtered[df_filtered['language'] == 'fr'])
     englishIntWeek = len(df_filtered[df_filtered['language'] == 'en'])
-
 
     # Avg messages
 
@@ -43,11 +40,10 @@ def main_view(request):
         'englishInt': englishIntTotal,
         'frenchIntWeek': frenchIntWeek,
         'englishIntWeek': englishIntWeek,
-        'avgMessages' : avgMsg
+        'avgMessages': avgMsg
     }
 
-    return render(request, 'home/index.html' , context=context)
-
+    return render(request, 'home/index.html', context=context)
 
 
 def create_df():
@@ -66,15 +62,6 @@ def create_df():
                        'choice_id': 'choice'},
               inplace=True)
 
-    df['choice'] = df['choice'].map(lambda x : Choice.objects.get(id=x).title_en)
-
+    df['choice'] = df['choice'].map(lambda x: Choice.objects.get(id=x).title_en)
 
     return df
-
-
-
-
-
-
-
-

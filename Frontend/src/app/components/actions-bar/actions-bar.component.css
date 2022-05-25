@@ -2,7 +2,7 @@
 .container {
   width: auto;
   display: flex;
-  height: auto;
+  height: 10%;
   padding: 1%;
   background-color: lightblue;
   border-bottom-right-radius: 30px;

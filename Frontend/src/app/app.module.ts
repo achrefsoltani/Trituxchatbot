@@ -13,6 +13,10 @@ import { ActionIconComponent } from './components/action-icon/action-icon.compon
 import { MessageComponent } from './components/message/message.component';
 import { ChoiceListComponent } from './components/choice-list/choice-list.component';
 import { ChoiceComponent } from './components/choice/choice.component';
+import { InputComponent } from './components/input/input.component';
+import { NoopAnimationsModule } from '@angular/platform-browser/animations';
+import {MatInputModule} from '@angular/material/input';
+
 
 @NgModule({
   declarations: [
@@ -26,15 +30,19 @@ import { ChoiceComponent } from './components/choice/choice.component';
     ActionIconComponent,
     MessageComponent,
     ChoiceListComponent,
-    ChoiceComponent
+    ChoiceComponent,
+    InputComponent
   ],
   imports: [
     BrowserModule,
-    HttpClientModule
+    HttpClientModule,
+    NoopAnimationsModule,
+    MatInputModule
   ],
   entryComponents: [
     MessageComponent,
     ChoiceListComponent,
+    InputComponent,
   ],
   providers: [],
   bootstrap: [AppComponent]

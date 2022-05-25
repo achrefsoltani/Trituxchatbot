@@ -91,8 +91,6 @@ export class DialogBoxComponent implements OnInit, AfterViewChecked {
     this.messageService.addMessage(m).subscribe();
     this.selectedChoices.push(choice);
 
-
-
     const messagefactory = this.messageFactory;
     const choiceListFactory = this.choiceListFactory;
     const target = this.target;
