@@ -1,5 +1,5 @@
 
-<div class="container" *ngIf="isShow">
+<div class="container" >
   <app-choice *ngFor="let choice of choices"
               [choice]="choice"
               (click)="AnswerChoice(choice)" ></app-choice>

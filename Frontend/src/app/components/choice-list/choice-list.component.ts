@@ -9,7 +9,6 @@ import {Choice} from '../../models/choice';
 export class ChoiceListComponent implements OnInit {
   @Input() choices: Choice[];
   @Output() answerChoice: EventEmitter<any> = new EventEmitter();
-  isShow = true;
 
   constructor() { }
 
@@ -17,12 +16,7 @@ export class ChoiceListComponent implements OnInit {
   }
 
   AnswerChoice(choice: Choice) {
-    this.toggleDisplay();
     this.answerChoice.emit({choice});
-  }
-
-  toggleDisplay() {
-    this.isShow = !this.isShow;
   }
 
 }

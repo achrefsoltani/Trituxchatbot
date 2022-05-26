@@ -12,11 +12,19 @@ export class ActionsBarComponent implements OnInit {
   @Output()
   back: EventEmitter<any> = new EventEmitter<any>();
 
+  @Output()
+  reset: EventEmitter<any> = new EventEmitter<any>();
+
+
   ngOnInit() {
   }
 
   public previous() {
     this.back.emit();
+  }
+
+  public resetDialog() {
+    this.reset.emit();
   }
 
 }

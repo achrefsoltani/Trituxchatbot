@@ -1,5 +1,6 @@
-import {Component, EventEmitter, OnInit, Output, ViewChild} from '@angular/core';
-import {DialogBoxComponent} from "../dialog-box/dialog-box.component";
+import {Component, EventEmitter, OnInit, Output, ViewChild, ViewContainerRef} from '@angular/core';
+import {DialogBoxComponent} from '../dialog-box/dialog-box.component';
+
 
 @Component({
   selector: 'app-chatbot',
@@ -23,6 +24,11 @@ export class ChatbotComponent implements OnInit {
 
   private previousChoice() {
     this.dialog.previousChoice();
+  }
+
+  private resetDialog() {
+    this.dialog.target.clear();
+    this.dialog.ngOnInit();
   }
 
 

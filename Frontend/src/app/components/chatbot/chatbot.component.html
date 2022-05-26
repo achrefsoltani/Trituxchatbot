@@ -2,8 +2,8 @@
 <div class="side-panel">
 
     <app-chatbot-title (toggleDisplay)="Exit()"></app-chatbot-title>
-    <app-dialog-box></app-dialog-box>
-    <app-input></app-input>
-    <app-actions-bar (back)='previousChoice()'></app-actions-bar>
+    <app-dialog-box ></app-dialog-box>
+
+    <app-actions-bar (back)='previousChoice()' (reset)="resetDialog()"></app-actions-bar>
 
 </div>
