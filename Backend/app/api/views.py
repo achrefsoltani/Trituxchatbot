@@ -41,7 +41,13 @@ class MessageApiView(APIView):
         serializer = MessageSerializer(data=request.data)
         if serializer.is_valid():
             serializer.save()
-            return Response(serializer.data, status=status.HTTP_200_OK)
+            print(serializer.data['content'])
+            if (serializer.data['content']) :
+                return Response(serializer.data['content'], status=status.HTTP_200_OK)
+            else :
+                return Response(serializer.data, status=status.HTTP_200_OK)
+
+
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
 

@@ -29,7 +29,7 @@ class MessageInlineAdmin(admin.TabularInline):
 
 @admin.register(Chat)
 class ChatAdmin(admin.ModelAdmin):
-    list_display = ('date','language','user','number_of_messages')
+    list_display = ('id','date','language','user','number_of_messages')
     inlines = [MessageInlineAdmin]
     readonly_fields = ['date','language']
     def number_of_messages(self, obj):

@@ -51,7 +51,7 @@ class Chat(models.Model):
     #Receive_Message
     #Change status
 
-# Chat History Model
+
 
 
 # User Model
