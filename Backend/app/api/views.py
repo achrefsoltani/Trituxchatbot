@@ -43,7 +43,7 @@ class MessageApiView(APIView):
             serializer.save()
             print(serializer.data['content'])
             if (serializer.data['content']) :
-                return Response(serializer.data['content'], status=status.HTTP_200_OK)
+                return Response('received : ' + serializer.data['content'], status=status.HTTP_200_OK)
             else :
                 return Response(serializer.data, status=status.HTTP_200_OK)
 

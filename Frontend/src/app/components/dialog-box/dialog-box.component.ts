@@ -155,11 +155,12 @@ export class DialogBoxComponent implements OnInit, AfterViewChecked {
   public answerMessage(val: string) {
     const m = {
       sender: 'user',
-      type: 'Message',
+      type: 'text',
       chat: this.chat.id,
       content: val,
     };
-    // this.messageService.addMessage(m).subscribe();
+    console.log(m);
+    this.messageService.addMessage(m).subscribe( response => console.log(response));
 
     const messagefactory = this.messageFactory;
     const target = this.target;
