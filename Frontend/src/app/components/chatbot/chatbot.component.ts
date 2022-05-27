@@ -1,5 +1,6 @@
 import {Component, EventEmitter, OnInit, Output, ViewChild, ViewContainerRef} from '@angular/core';
 import {DialogBoxComponent} from '../dialog-box/dialog-box.component';
+import {InputComponent} from "../input/input.component";
 
 
 @Component({
@@ -9,6 +10,7 @@ import {DialogBoxComponent} from '../dialog-box/dialog-box.component';
 })
 export class ChatbotComponent implements OnInit {
   @ViewChild(DialogBoxComponent, {static: false}) dialog: DialogBoxComponent;
+  @ViewChild(InputComponent, {static: false}) input : InputComponent;
 
   constructor() { }
 
@@ -29,6 +31,10 @@ export class ChatbotComponent implements OnInit {
   private resetDialog() {
     this.dialog.target.clear();
     this.dialog.ngOnInit();
+  }
+
+  private answerMessage() {
+    this.dialog.answerMessage(this.input.message);
   }
 
 

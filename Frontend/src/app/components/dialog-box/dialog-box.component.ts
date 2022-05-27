@@ -152,6 +152,25 @@ export class DialogBoxComponent implements OnInit, AfterViewChecked {
     this.scrolldiv.nativeElement.scrollTop = this.scrolldiv.nativeElement.scrollHeight;
   }
 
+  public answerMessage(val: string) {
+    const m = {
+      sender: 'user',
+      type: 'Message',
+      chat: this.chat.id,
+      content: val,
+    };
+    // this.messageService.addMessage(m).subscribe();
+
+    const messagefactory = this.messageFactory;
+    const target = this.target;
+
+    if (m.content !== '') {
+      const MessageComponentRef = target.createComponent(messagefactory);
+      MessageComponentRef.instance.message = m.content;
+      MessageComponentRef.instance.css = 'client';
+    }
+  }
+
 
 
 }

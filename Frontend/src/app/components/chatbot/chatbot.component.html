@@ -3,7 +3,7 @@
 
     <app-chatbot-title (toggleDisplay)="Exit()"></app-chatbot-title>
     <app-dialog-box ></app-dialog-box>
-
+    <app-input (messageReceived)="answerMessage()" ></app-input>
     <app-actions-bar (back)='previousChoice()' (reset)="resetDialog()"></app-actions-bar>
 
 </div>

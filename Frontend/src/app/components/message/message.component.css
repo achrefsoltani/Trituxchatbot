@@ -4,17 +4,20 @@
   margin-bottom: 10px;
   background-color: azure;
   border-radius: 5px;
-  padding: 5px;
+  padding: 10px;
   display: inline-block;
+  line-height: 100%;
+  float: right;
+
 }
 
 .client {
   margin-top: 10px;
   margin-bottom: 10px;
-  background-color: lightblue;
+  background-color: #acffff;
   border-radius: 5px;
-  padding: 5px;
-
-  float: right;
-
+  padding: 10px;
+  display: inline-block;
+  line-height: 100%;
+  word-wrap: anywhere;
 }

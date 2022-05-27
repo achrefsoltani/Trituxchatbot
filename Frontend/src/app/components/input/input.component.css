@@ -12,13 +12,23 @@
   min-width: 150px;
   max-width: 500px;
   width: 90%;
-  background-color: white;
+  height: 50%;
+
   margin-left: 5px;
   border-radius: 5px;
 
 }
 
-.example-full-width {
-  width: 100%;
+.input {
+  width: 90%;
+  height: 50%;
+  border-radius: 5px;
+  border-color: white;
 }
 
+.sendButton {
+  position: absolute;
+  right: 0px;
+  width: 25px;
+  height: 25px;
+}

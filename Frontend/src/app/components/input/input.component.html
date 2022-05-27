@@ -1,13 +1,11 @@
 <div class="container">
-  <form class="example-form">
-    <mat-form-field class="example-full-width" appearance="fill">
 
-      <input matInput #message maxlength="256" placeholder="Type Message Here">
+  <input #input class="input" type="text" name="messageContent" maxlength="256"
+         placeholder="Type Message Here" (keyup.enter)="getMessage(input.value)" autocomplete="off">
 
-    </mat-form-field>
 
-  </form>
-  <button>Send</button>
+  <img (click)="getMessage(input.value)" class="sendButton" src="assets/send-message.png" alt="send">
+
 </div>
 
 
