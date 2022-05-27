@@ -1,8 +1,10 @@
+import datetime
+
 from rest_framework.views import APIView
 from rest_framework.response import Response
 from rest_framework import status
 from rest_framework import permissions
-from app.models import Choice
+from app.models import Choice, Message
 from .serializers import ChoiceSerializer,ChatSerializer,MessageSerializer
 
 class ChoiceListApiView(APIView):
@@ -41,9 +43,15 @@ class MessageApiView(APIView):
         serializer = MessageSerializer(data=request.data)
         if serializer.is_valid():
             serializer.save()
-            print(serializer.data['content'])
             if (serializer.data['content']) :
-                return Response('received : ' + serializer.data['content'], status=status.HTTP_200_OK)
+                # Chatbot response function here / response need to be in message format
+                response = Message(sender='chatbot',
+                                   chat_id= serializer.data['chat'],
+                                   type='text',
+                                   content='received :' + serializer.data['content'],
+                                   date=datetime.datetime.now())
+                r = MessageSerializer(response)
+                return Response(r.data, status=status.HTTP_200_OK)
             else :
                 return Response(serializer.data, status=status.HTTP_200_OK)
 

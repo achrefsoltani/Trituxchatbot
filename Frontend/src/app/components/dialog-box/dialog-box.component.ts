@@ -159,8 +159,8 @@ export class DialogBoxComponent implements OnInit, AfterViewChecked {
       chat: this.chat.id,
       content: val,
     };
-    console.log(m);
-    this.messageService.addMessage(m).subscribe( response => console.log(response));
+
+
 
     const messagefactory = this.messageFactory;
     const target = this.target;
@@ -170,6 +170,12 @@ export class DialogBoxComponent implements OnInit, AfterViewChecked {
       MessageComponentRef.instance.message = m.content;
       MessageComponentRef.instance.css = 'client';
     }
+
+    this.messageService.addMessage(m).subscribe( response => {
+      const MessageComponentRef = target.createComponent(messagefactory);
+      MessageComponentRef.instance.message = response.content;
+      MessageComponentRef.instance.css = 'chatbot';
+    });
   }
 
 
