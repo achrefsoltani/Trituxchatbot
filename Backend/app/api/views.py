@@ -50,7 +50,10 @@ class MessageApiView(APIView):
                                    type='text',
                                    content='received :' + serializer.data['content'],
                                    date=datetime.datetime.now())
+                #Saving the response in Chat
+                response.save()
                 r = MessageSerializer(response)
+
                 return Response(r.data, status=status.HTTP_200_OK)
             else :
                 return Response(serializer.data, status=status.HTTP_200_OK)
