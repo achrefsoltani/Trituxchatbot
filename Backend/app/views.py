@@ -62,6 +62,6 @@ def create_df():
                        'choice_id': 'choice'},
               inplace=True)
 
-    df['choice'] = df['choice'].map(lambda x: Choice.objects.get(id=x).title_en)
+    df['choice'] = df['choice'].map(lambda x: Choice.objects.get(id=x).title_en, na_action='ignore')
 
     return df

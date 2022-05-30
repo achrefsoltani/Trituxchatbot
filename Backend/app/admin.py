@@ -13,7 +13,7 @@ class ChoiceAdmin(admin.ModelAdmin):
 
 @admin.register(Message)
 class MessageAdmin(admin.ModelAdmin):
-    list_display = ('sender','type','content','choice','date','chat')
+    list_display = ('id','sender','type','content','choice','date','chat')
     def choice(self, obj):
         return Choice.objects.get(id=obj.choice_id)
 
