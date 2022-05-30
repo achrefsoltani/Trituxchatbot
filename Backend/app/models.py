@@ -1,4 +1,7 @@
+import datetime
+
 from django.db import models
+from django.contrib.auth import get_user_model
 
 # Chatbot Model
 class Chatbot(models.Model):
@@ -54,33 +57,33 @@ class Chat(models.Model):
 
 
 
-# User Model
-class User(models.Model):
-    username = models.CharField(max_length=80, blank=True, null=True)
-    email = models.CharField(max_length=80, blank=True, null=True)
-
-    def __str__(self):
-        return self.username
-
-
-
-# Client Model (inheritance from user to be added)
+# Client Model
 class Client(models.Model):
-    #username = models.CharField(max_length=80, blank=True, null=True)
     firstName = models.CharField(max_length=80, blank=True, null=True)
     lastName = models.CharField(max_length=80, blank=True, null=True)
-    #email = models.CharField(max_length=80, blank=True, null=True)
+    email = models.CharField(max_length=80, blank=True, null=True)
     phone = models.CharField(max_length=80, blank=True, null=True)
-    address = models.CharField(max_length=80, blank=True, null=True)
-    organization = models.CharField(max_length=80, blank=True, null=True)
 
     def __str__(self):
         return self.firstName
 
-# Agent Model
 
-# Admin Model
+# ContactRequest Model
+class ContactRequest(models.Model):
+    client = models.ForeignKey('Client', on_delete=models.CASCADE, related_name="contactRequests", null=True, blank=True)
+    chat = models.ForeignKey('Chat', on_delete= models.SET_NULL, related_name="contactRequests", null=True, blank=True)
+    content = models.TextField(blank=True, null=True)
+    agent = models.ForeignKey(get_user_model(), on_delete=models.CASCADE, blank=True, null=True)
+    agentNotes = models.TextField(blank=True, null=True)
+    status = models.CharField(max_length=20, choices=[('unclaimed','Unclaimed'),('claimed','Claimed'),('closed','Closed')], blank=True)
+    created_at = models.DateTimeField(auto_now_add=True, null=True, blank=True)
+    closed_at = models.DateTimeField(null=True, blank=True)
+    responseTime = models.DurationField(null=True, blank=True)
 
-# Contact Request Model
+    def save(self, *args, **kwargs):
+        if self.status == 'closed':
+            self.closed_at = datetime.datetime.now()
+            self.responseTime = self.closed_at - self.created_at.replace(tzinfo=None)
+        super().save(*args, **kwargs)
 
 # Contact Request History

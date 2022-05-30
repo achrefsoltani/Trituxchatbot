@@ -1,10 +1,11 @@
 from django.contrib import admin
-from .models import Choice,Chat,Message
+from .models import Choice,Chat,Message,ContactRequest,Client
 
 # Register your models here.
 
 
 
+admin.site.register(Client)
 
 @admin.register(Choice)
 class ChoiceAdmin(admin.ModelAdmin):
@@ -34,4 +35,9 @@ class ChatAdmin(admin.ModelAdmin):
     readonly_fields = ['date','language']
     def number_of_messages(self, obj):
         return obj.messages.count()
+
+
+@admin.register(ContactRequest)
+class ContactRequest(admin.ModelAdmin):
+    list_display = ('id','status','created_at','chat','client','content','agent','agentNotes','responseTime')
 
