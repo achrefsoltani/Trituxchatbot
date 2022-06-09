@@ -1,11 +1,13 @@
 from django.contrib import admin
 from .models import Choice,Chat,Message,ContactRequest,Client
 
+
+
 # Register your models here.
 
 
 
-admin.site.register(Client)
+
 
 @admin.register(Choice)
 class ChoiceAdmin(admin.ModelAdmin):
@@ -39,5 +41,12 @@ class ChatAdmin(admin.ModelAdmin):
 
 @admin.register(ContactRequest)
 class ContactRequest(admin.ModelAdmin):
-    list_display = ('id','status','created_at','chat','client','content','agent','agentNotes','responseTime')
+    list_display = ('id','status','created_at','client','chat','content','agent','agentNotes','responseTime')
+    list_filter = ('status','agent')
+
+@admin.register(Client)
+class Client(admin.ModelAdmin):
+    list_display = ('lastName','firstName','email','phone')
+
+
 

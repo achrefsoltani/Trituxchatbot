@@ -49,7 +49,7 @@ class Chat(models.Model):
     #status = models.CharField(max_length=80, blank=True, null=True)
 
     def __str__(self):
-        return 'Chat started on :' + str(self.date)
+        return "Chat started at %s:%s:%s" % (self.date.hour, self.date.minute, self.date.second)
 
     #Receive_Message
     #Change status
@@ -65,7 +65,7 @@ class Client(models.Model):
     phone = models.CharField(max_length=80, blank=True, null=True)
 
     def __str__(self):
-        return self.firstName
+        return self.lastName + ' ' + self.firstName
 
 
 # ContactRequest Model
@@ -86,4 +86,4 @@ class ContactRequest(models.Model):
             self.responseTime = self.closed_at - self.created_at.replace(tzinfo=None)
         super().save(*args, **kwargs)
 
-# Contact Request History
+

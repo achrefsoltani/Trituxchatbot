@@ -2,7 +2,8 @@ from django.urls import path, include
 from .views import (
     ChoiceListApiView,
     ChatApiView,
-    MessageApiView
+    MessageApiView,
+    ContactRequestApiView
 )
 
 urlpatterns = [
@@ -10,5 +11,6 @@ urlpatterns = [
     path('message/', MessageApiView.as_view()),
     path('choices/', ChoiceListApiView.as_view()),
     path('choices/<int:id>/', ChoiceListApiView.as_view()),
+    path('cr/', ContactRequestApiView.as_view())
 
 ]
