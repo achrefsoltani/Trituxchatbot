@@ -1,4 +1,7 @@
 import {Component, EventEmitter, OnInit, Output} from '@angular/core';
+import {MatDialog, MatDialogConfig} from '@angular/material/dialog';
+import {ContactComponent} from '../contact/contact.component';
+
 
 @Component({
   selector: 'app-actions-bar',
@@ -7,7 +10,7 @@ import {Component, EventEmitter, OnInit, Output} from '@angular/core';
 })
 export class ActionsBarComponent implements OnInit {
 
-  constructor() { }
+  constructor(private matDialog: MatDialog) { }
 
   @Output()
   back: EventEmitter<any> = new EventEmitter<any>();
@@ -26,5 +29,10 @@ export class ActionsBarComponent implements OnInit {
   public resetDialog() {
     this.reset.emit();
   }
+
+  public showContact() {
+    this.matDialog.open(ContactComponent, {data: {}, width : '50%'});
+  }
+
 
 }
