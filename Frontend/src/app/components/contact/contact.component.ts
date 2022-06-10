@@ -1,6 +1,7 @@
 import {Component, Inject, OnInit} from '@angular/core';
 import {MatDialog, MatDialogRef, MAT_DIALOG_DATA} from '@angular/material/dialog';
 import {ContactService} from '../../services/contact.service';
+import {DataService} from '../../services/data.service';
 
 @Component({
   selector: 'app-contact',
@@ -9,13 +10,18 @@ import {ContactService} from '../../services/contact.service';
 })
 export class ContactComponent implements OnInit {
 
+  chatId: number;
+
+
   constructor(private contactService: ContactService,
+              private dataService: DataService,
               private dialogRef: MatDialogRef<ContactComponent>,
               @Inject(MAT_DIALOG_DATA) public data: any) { }
 
-  lastName: string;
 
   ngOnInit() {
+    this.dataService.currentChatId.subscribe(id => this.chatId = id);
+
   }
 
   public closeDialog() {
@@ -23,7 +29,7 @@ export class ContactComponent implements OnInit {
   }
 
   public onSubmit(contactForm) {
-
+    console.log(this.chatId);
     const form = {
       client: {
         firstName: contactForm.value.firstName,
@@ -32,7 +38,7 @@ export class ContactComponent implements OnInit {
         email: contactForm.value.email,
       },
       content: contactForm.value.content,
-      chat: 710
+      chat: this.chatId
     };
     this.contactService.addContactRequest(form).subscribe();
     this.closeDialog();

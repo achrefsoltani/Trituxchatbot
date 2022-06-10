@@ -17,7 +17,7 @@
   </mat-form-field>
 
   <mat-form-field class="full-width">
-    <textarea matInput placeholder="Message" name="content" ngModel></textarea>
+    <textarea matInput [mat-autosize] matAutosizeMaxRows="8" placeholder="Message" name="content" ngModel></textarea>
   </mat-form-field>
 
   <mat-dialog-actions class="buttons">

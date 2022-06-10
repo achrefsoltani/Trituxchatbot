@@ -16,6 +16,8 @@ import {Chat} from '../../models/chat';
 import {Message} from '../../models/message';
 import {ChatService} from '../../services/chat.service';
 import {MessageService} from '../../services/message.service';
+import {DataService} from "../../services/data.service";
+import {Subscription} from "rxjs";
 
 
 
@@ -43,6 +45,7 @@ export class DialogBoxComponent implements OnInit, AfterViewChecked {
   private messageFactory: ComponentFactory<MessageComponent>;
   private choiceListFactory: ComponentFactory<ChoiceListComponent>;
 
+
   // Extract language from website not yet implemented
   private language = 'fr';
   private chat: Chat = {
@@ -54,6 +57,7 @@ export class DialogBoxComponent implements OnInit, AfterViewChecked {
   @ViewChild('scrolldiv', {static: false}) scrolldiv: any;
 
   constructor(private choiceService: ChoiceService,
+              private dataService: DataService,
               private chatService: ChatService,
               private messageService: MessageService,
               private componentFactoryResolver: ComponentFactoryResolver) { }
@@ -70,10 +74,11 @@ export class DialogBoxComponent implements OnInit, AfterViewChecked {
     this.messageFactory = this.componentFactoryResolver.resolveComponentFactory(MessageComponent);
     this.choiceListFactory = this.componentFactoryResolver.resolveComponentFactory(ChoiceListComponent);
 
-
-    this.chatService.addChat(this.chat).subscribe((c) => (this.chat = c) );
-
-
+    this.dataService.currentChatId.subscribe();
+    this.chatService.addChat(this.chat).subscribe((c) => {
+      this.chat = c;
+      this.dataService.changeChatId(this.chat.id);
+} );
 
   }
 

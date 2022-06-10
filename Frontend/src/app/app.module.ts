@@ -18,8 +18,9 @@ import {MatInputModule} from '@angular/material/input';
 import {MatDialogModule} from '@angular/material/dialog';
 import { ContactComponent } from './components/contact/contact.component';
 import {FormsModule} from '@angular/forms';
-import {MatButtonModule} from "@angular/material/button";
-import {MatDividerModule} from "@angular/material/divider";
+import {MatButtonModule} from '@angular/material/button';
+import {MatDividerModule} from '@angular/material/divider';
+import {DataService} from './services/data.service';
 
 @NgModule({
   declarations: [
@@ -56,7 +57,7 @@ import {MatDividerModule} from "@angular/material/divider";
     InputComponent,
     ContactComponent
   ],
-  providers: [],
+  providers: [DataService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
