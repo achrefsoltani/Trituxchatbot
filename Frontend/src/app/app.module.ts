@@ -48,7 +48,7 @@ import {MatDividerModule} from "@angular/material/divider";
     MatButtonModule,
     MatButtonModule,
     MatButtonModule,
-    MatDividerModule
+    MatDividerModule,
   ],
   entryComponents: [
     MessageComponent,

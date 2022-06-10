@@ -43,6 +43,7 @@ class ChatAdmin(admin.ModelAdmin):
 class ContactRequest(admin.ModelAdmin):
     list_display = ('id','status','created_at','client','chat','content','agent','agentNotes','responseTime')
     list_filter = ('status','agent')
+    search_fields = ["client__firstName","client__lastName","agent__username"]
 
 @admin.register(Client)
 class Client(admin.ModelAdmin):

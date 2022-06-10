@@ -1,8 +1,11 @@
+// tslint:disable-next-line:class-name
 export interface contactRequest {
-  id?: number;
-  client_firstname: string;
-  client_lastname: string;
-  content: string;
-  client_phone: number[];
-  client_email: string;
+  chat: number;
+  client: {
+    firstName: any;
+    lastName: any;
+    phone: any;
+    email: any };
+  content: any;
 }
+
