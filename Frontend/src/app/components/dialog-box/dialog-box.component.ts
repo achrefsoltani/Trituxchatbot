@@ -47,7 +47,7 @@ export class DialogBoxComponent implements OnInit, AfterViewChecked {
 
 
   // Extract language from website not yet implemented
-  private language = 'fr';
+  private language = 'en';
   private chat: Chat = {
       language : this.language,
       user : 'Not logged in'

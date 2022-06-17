@@ -4,6 +4,11 @@ from django.db import models
 from django.contrib.auth import get_user_model
 
 # Chatbot Model
+from django.shortcuts import redirect
+from django.utils.html import format_html
+from django.urls import reverse
+
+
 class Chatbot(models.Model):
     name = models.CharField(max_length=80, blank=True, null=True)
     language = models.CharField(max_length=2, choices=[('fr','Francais'),('en','English')])
@@ -85,5 +90,9 @@ class ContactRequest(models.Model):
             self.closed_at = datetime.datetime.now()
             self.responseTime = self.closed_at - self.created_at.replace(tzinfo=None)
         super().save(*args, **kwargs)
+
+
+
+
 
 

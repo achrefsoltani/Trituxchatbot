@@ -1,4 +1,9 @@
 from django.contrib import admin
+from django.http import HttpResponseRedirect
+from django.template.defaulttags import url
+from django.utils.html import format_html
+from django.urls import reverse
+
 from .models import Choice,Chat,Message,ContactRequest,Client
 
 
@@ -14,11 +19,7 @@ class ChoiceAdmin(admin.ModelAdmin):
     list_display = ("id","title_en","response_en","title_fr","response_fr")
     search_fields = ["title_en","title_fr"]
 
-@admin.register(Message)
-class MessageAdmin(admin.ModelAdmin):
-    list_display = ('id','sender','type','content','choice','date','chat')
-    def choice(self, obj):
-        return Choice.objects.get(id=obj.choice_id)
+
 
 
 
@@ -41,9 +42,73 @@ class ChatAdmin(admin.ModelAdmin):
 
 @admin.register(ContactRequest)
 class ContactRequest(admin.ModelAdmin):
-    list_display = ('id','status','created_at','client','chat','content','agent','agentNotes','responseTime')
+    model = ContactRequest
+
+    list_display = ('id','created_at','client','content',
+                    'agent',
+                    'status','change_status','responseTime')
+
+    readonly_fields = ['content','agent','client',
+                       'chat','closed_at','responseTime']
+
     list_filter = ('status','agent')
+
     search_fields = ["client__firstName","client__lastName","agent__username"]
+
+    list_editable = []
+
+
+    fieldsets = (
+        (
+            "Client",{
+                "fields":(("client","chat"),"content")
+            }
+        ),
+        (
+            "Agent",{
+                "fields":("agent","agentNotes")
+            }
+        ),
+        (
+            "Request Status",{
+                "fields":("status",("closed_at","responseTime"))
+            }
+        )
+    )
+
+    def change_status(self,obj):
+        action = ''
+        if obj.status == 'unclaimed':
+            action = 'Claim'
+        elif obj.status == 'claimed':
+            action = 'Close'
+        return format_html(
+            """ <a style="display:block;margin:auto;color:blue;width:70%;font-weight:bold" 
+            href="../../cs/{}" >{}</a> """,
+            obj.id,
+            action
+        )
+
+    def save_model(self, request, obj, form, change):
+        if obj.status == 'unclaimed':
+            obj.agent = None
+        if getattr(obj,'agent', None) is None:
+            if obj.status == 'claimed':
+                obj.agent = request.user
+        obj.save()
+
+    def get_readonly_fields(self, request, obj=None):
+        if obj.status == 'closed':
+            return ['content','agent','client','status',
+                    'chat','closed_at','responseTime']
+        else:
+            return super(ContactRequest, self).get_readonly_fields(request, obj)
+
+
+
+
+
+
 
 @admin.register(Client)
 class Client(admin.ModelAdmin):

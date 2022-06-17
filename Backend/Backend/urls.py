@@ -20,9 +20,11 @@ import app.views
 
 urlpatterns = [
     path('grappelli/', include('grappelli.urls')),
+    path('admin/cs/<int:id>/', app.views.change_status_view, name="change-status"),
     path('admin/', admin.site.urls),
     path('api-auth/', include('rest_framework.urls')),
     path('app/', include('app.urls')),
     path('',app.views.main_view, name='main_view')
+
 
 ]

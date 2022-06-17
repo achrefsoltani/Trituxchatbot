@@ -1,5 +1,6 @@
-from django.shortcuts import render
-from .models import Chat, Message, Choice
+from django.http import HttpResponse
+from django.shortcuts import render, redirect
+from .models import Chat, Message, Choice, ContactRequest
 import pandas as pd
 import datetime
 import plotly.express as px
@@ -65,3 +66,20 @@ def create_df():
     df['choice'] = df['choice'].map(lambda x: Choice.objects.get(id=x).title_en, na_action='ignore')
 
     return df
+
+
+def change_status_view(request, id):
+    cr = ContactRequest.objects.get(id=id)
+    if (cr.status == 'unclaimed'):
+        if (cr.agent is None):
+            cr.agent = request.user
+        cr.status = 'claimed'
+        print('claimed')
+        cr.save()
+        return redirect('../../app/contactrequest/')
+    elif (cr.status == 'claimed'):
+        cr.status = 'closed'
+        print('closed')
+        cr.save()
+        return redirect('../../app/contactrequest/'+str(id))
+
