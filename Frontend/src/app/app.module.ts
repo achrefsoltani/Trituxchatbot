@@ -62,7 +62,8 @@ import {MatRadioModule} from "@angular/material/radio";
     ChoiceListComponent,
     InputComponent,
     ContactComponent,
-    DemoInfoComponent
+    DemoInfoComponent,
+    DemoDateComponent
   ],
   providers: [DataService],
   bootstrap: [AppComponent]

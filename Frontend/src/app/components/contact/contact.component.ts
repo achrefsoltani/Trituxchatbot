@@ -29,7 +29,6 @@ export class ContactComponent implements OnInit {
   }
 
   public onSubmit(contactForm) {
-    console.log(this.chatId);
     const form = {
       client: {
         firstName: contactForm.value.firstName,

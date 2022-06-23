@@ -1,5 +1,6 @@
 import {Component, Inject, OnInit} from '@angular/core';
-import {MAT_DIALOG_DATA, MatDialogRef} from '@angular/material/dialog';
+import {MAT_DIALOG_DATA, MatDialog, MatDialogRef} from '@angular/material/dialog';
+import {DemoDateComponent} from "../demo-date/demo-date.component";
 
 @Component({
   selector: 'app-demo-info',
@@ -8,7 +9,8 @@ import {MAT_DIALOG_DATA, MatDialogRef} from '@angular/material/dialog';
 })
 export class DemoInfoComponent implements OnInit {
 
-  constructor(private dialogRef: MatDialogRef<DemoInfoComponent>,
+  constructor(private matDialog: MatDialog,
+              private dialogRef: MatDialogRef<DemoInfoComponent>,
               @Inject(MAT_DIALOG_DATA) public data: any) { }
 
   ngOnInit() {
@@ -16,6 +18,15 @@ export class DemoInfoComponent implements OnInit {
 
   public closeDialog() {
     this.dialogRef.close();
+  }
+
+  public showDemoDate() {
+    this.matDialog.open(DemoDateComponent, {data: {}, width : '50%'});
+  }
+
+  public onSubmit() {
+    this.dialogRef.close();
+    this.showDemoDate();
   }
 
 }
