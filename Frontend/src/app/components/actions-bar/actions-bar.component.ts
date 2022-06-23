@@ -1,6 +1,7 @@
 import {Component, EventEmitter, OnInit, Output} from '@angular/core';
 import {MatDialog, MatDialogConfig} from '@angular/material/dialog';
 import {ContactComponent} from '../contact/contact.component';
+import {DemoInfoComponent} from "../demo-info/demo-info.component";
 
 
 @Component({
@@ -32,6 +33,10 @@ export class ActionsBarComponent implements OnInit {
 
   public showContact() {
     this.matDialog.open(ContactComponent, {data: {}, width : '50%'});
+  }
+
+  public showDemo() {
+    this.matDialog.open(DemoInfoComponent, {data: {}, width : '50%'});
   }
 
 

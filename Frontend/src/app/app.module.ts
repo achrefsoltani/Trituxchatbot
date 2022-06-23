@@ -21,6 +21,9 @@ import {FormsModule} from '@angular/forms';
 import {MatButtonModule} from '@angular/material/button';
 import {MatDividerModule} from '@angular/material/divider';
 import {DataService} from './services/data.service';
+import { DemoInfoComponent } from './components/demo-info/demo-info.component';
+import { DemoDateComponent } from './components/demo-date/demo-date.component';
+import {MatRadioModule} from "@angular/material/radio";
 
 @NgModule({
   declarations: [
@@ -36,7 +39,9 @@ import {DataService} from './services/data.service';
     ChoiceListComponent,
     ChoiceComponent,
     InputComponent,
-    ContactComponent
+    ContactComponent,
+    DemoInfoComponent,
+    DemoDateComponent
   ],
   imports: [
     BrowserModule,
@@ -50,12 +55,14 @@ import {DataService} from './services/data.service';
     MatButtonModule,
     MatButtonModule,
     MatDividerModule,
+    MatRadioModule
   ],
   entryComponents: [
     MessageComponent,
     ChoiceListComponent,
     InputComponent,
-    ContactComponent
+    ContactComponent,
+    DemoInfoComponent
   ],
   providers: [DataService],
   bootstrap: [AppComponent]
