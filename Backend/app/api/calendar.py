@@ -54,13 +54,13 @@ def list_calendars():
         primary = "Primary" if calendar.get('primary') else ""
         print("%s\t%s\t%s" % (summary, id, primary))
 
-def list_events():
+def list_events(calendarId):
     service = get_calendar_service()
     # Call the Calendar API
     now = datetime.datetime.utcnow().isoformat() + 'Z'  # 'Z' indicates UTC time
     print('Getting List o 10 events')
     events_result = service.events().list(
-        calendarId='primary', timeMin=now,
+        calendarId=calendarId, timeMin=now,
         maxResults=10, singleEvents=True,
         orderBy='startTime').execute()
     events = events_result.get('items', [])
@@ -95,7 +95,7 @@ def create_event():
     print("starts at: ", event_result['start']['dateTime'])
     print("ends at: ", event_result['end']['dateTime'])
 
-def update_event():
+def update_event(calendarId, eventId, email):
 
     # update the event to tomorrow 9 AM IST
     service = get_calendar_service()
@@ -106,14 +106,14 @@ def update_event():
     end = (tomorrow + timedelta(hours=2)).isoformat()
 
     event_result = service.events().update(
-        calendarId='primary',
-        eventId='s74ggd287rb47cib46rgnht7v4',
+        calendarId=calendarId,
+        eventId=eventId,
         body={
             "summary": 'Updated Automating calendar',
             "description": 'This is a tutorial example of automating google calendar with python, updated time.',
             "start": {"dateTime": start, "timeZone": 'Asia/Kolkata'},
             "end": {"dateTime": end, "timeZone": 'Asia/Kolkata'},
-            "attendees": [{"email": "achref.soltani@gmail.com"}]
+            "attendees": [{"email": email}]
         },
     ).execute()
 
