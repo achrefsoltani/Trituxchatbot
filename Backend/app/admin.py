@@ -55,7 +55,7 @@ class ContactRequest(admin.ModelAdmin):
 
     search_fields = ["client__firstName","client__lastName","agent__username"]
 
-    list_editable = []
+    list_editable = ['status']
 
 
     fieldsets = (
