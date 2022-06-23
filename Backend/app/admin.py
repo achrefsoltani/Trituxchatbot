@@ -4,7 +4,7 @@ from django.template.defaulttags import url
 from django.utils.html import format_html
 from django.urls import reverse
 
-from .models import Choice,Chat,Message,ContactRequest,Client
+from .models import Choice,Chat,Message,ContactRequest,Client, DemoRequest
 
 
 
@@ -116,3 +116,6 @@ class Client(admin.ModelAdmin):
 
 
 
+@admin.register(DemoRequest)
+class DemoRequest(admin.ModelAdmin):
+    list_display = ()

@@ -91,6 +91,23 @@ class ContactRequest(models.Model):
             self.responseTime = self.closed_at - self.created_at.replace(tzinfo=None)
         super().save(*args, **kwargs)
 
+# DemoRequest Model
+class DemoRequest(models.Model):
+    client = models.ForeignKey('Client', on_delete=models.CASCADE, related_name="demoRequests", null=True,blank=True)
+    service = models.CharField(max_length=20,
+                              choices=[('service1', 'service 1'), ('service2', 'service2'), ('service3', 'service 3')],
+                              blank=True)
+    date = models.DateTimeField(null=True, blank=True)
+    chat = models.ForeignKey('Chat', on_delete=models.SET_NULL, related_name="demoRequests", null=True, blank=True)
+    created_at = models.DateTimeField(auto_now_add=True, null=True, blank=True)
+
+# Demo Model
+class Demo(models.Model):
+    service = models.CharField(max_length=20,
+                               choices=[('service1', 'service 1'), ('service2', 'service2'), ('service3', 'service 3')],
+                               blank=True)
+    date = models.DateTimeField(null=True, blank=True)
+    event_id = models.CharField(max_length=200, blank=True, null=True)
 
 
 

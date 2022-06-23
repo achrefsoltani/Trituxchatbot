@@ -7,7 +7,8 @@ from rest_framework.response import Response
 from rest_framework import status
 from rest_framework import permissions
 from app.models import Choice, Message
-from .serializers import ChoiceSerializer,ChatSerializer,MessageSerializer,ContactRequestSerializer
+from .serializers import ChoiceSerializer,ChatSerializer,MessageSerializer,ContactRequestSerializer,DemoRequestSerializer,DemoSerializer
+from app.api.calendar import list_events
 
 class ChoiceListApiView(APIView):
     """
@@ -75,4 +76,26 @@ class ContactRequestApiView(APIView):
             return Response(serializer.data, status=status.HTTP_200_OK)
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
+class DemoRequestApiView(APIView):
 
+    #Get next 4 events for a specific service
+    def get(self,request,service):
+        calendarId = "id to be selected based on service"
+        if service:
+            events = list_events(calendarId=calendarId)
+            demo = "list of demo to be created based on events"
+            serializer = DemoSerializer(demo)
+            return Response(serializer.data, status=status.HTTP_200_OK)
+
+
+
+    #Create New DemoRequest and/or Client
+
+    def post(self,request):
+        serializer = DemoRequestSerializer(data=request.data)
+        if serializer.is_valid():
+            #Code to add client to event
+            serializer.save()
+            return Response(serializer.data, status=status.HTTP_200_OK)
+
+        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)

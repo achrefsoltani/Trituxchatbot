@@ -1,5 +1,5 @@
 from rest_framework import serializers
-from app.models import Choice,Chat,Message,Client,ContactRequest
+from app.models import Choice,Chat,Message,Client,ContactRequest,DemoRequest,Demo
 
 class ChoiceSerializer(serializers.ModelSerializer):
     class Meta:
@@ -44,3 +44,26 @@ class ContactRequestSerializer(serializers.ModelSerializer):
         instance.status = "unclaimed"
         instance.save()
         return instance
+
+class DemoRequestSerializer(serializers.ModelSerializer):
+    client = ClientSerializer()
+    class Meta:
+        model = DemoRequest
+        fields = '__all__'
+
+    def create(self, validated_data):
+        client_data = validated_data.pop('client')
+        try:
+            client = Client.objects.get(email=client_data.get('email'))
+        except Client.DoesNotExist:
+            client = Client.objects.create(**client_data)
+
+        instance = DemoRequest.objects.create(**validated_data)
+        instance.client = client
+        return instance
+
+class DemoSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Demo
+        fields = '__all__'
+
