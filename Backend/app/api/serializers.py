@@ -62,8 +62,5 @@ class DemoRequestSerializer(serializers.ModelSerializer):
         instance.client = client
         return instance
 
-class DemoSerializer(serializers.ModelSerializer):
-    class Meta:
-        model = Demo
-        fields = '__all__'
+
 
