@@ -118,4 +118,4 @@ class Client(admin.ModelAdmin):
 
 @admin.register(DemoRequest)
 class DemoRequest(admin.ModelAdmin):
-    list_display = ()
+    list_display = ('id','client','demo','created_at')

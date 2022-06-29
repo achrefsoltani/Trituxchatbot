@@ -2,17 +2,15 @@
 
 <mat-divider></mat-divider>
 
-<form class="form"  novalidate>
-  <mat-radio-group aria-label="Select an option">
-    <mat-radio-button value="1">date 1</mat-radio-button>
-    <br>
-    <mat-radio-button value="2">date 2</mat-radio-button>
-    <br>
-    <mat-radio-button value="3">date 3</mat-radio-button>
-    <br>
-    <mat-radio-button value="4">date 4</mat-radio-button>
-    <br>
+<form class="form" #f='ngForm' (ngSubmit)="onSubmit(f)" novalidate>
+  <mat-radio-group aria-label="Select an option" name="demoId" ngModel>
+    <div *ngFor="let demo of demos">
+      <mat-radio-button value="{{demo.id}}" >{{demo.start.dateTime | date:'EEEE d MMMM y h:mm a'}}</mat-radio-button>
+      <br>
+    </div>
+
   </mat-radio-group>
+
 
   <mat-dialog-actions class="buttons">
     <button mat-raised-button type="submit" color="primary" class="button" >Confirm</button>

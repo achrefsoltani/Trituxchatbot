@@ -1,6 +1,7 @@
 import {Component, Inject, OnInit} from '@angular/core';
 import {MAT_DIALOG_DATA, MatDialog, MatDialogRef} from '@angular/material/dialog';
-import {DemoDateComponent} from "../demo-date/demo-date.component";
+import {DemoDateComponent} from '../demo-date/demo-date.component';
+import {NgForm} from '@angular/forms';
 
 @Component({
   selector: 'app-demo-info',
@@ -20,13 +21,13 @@ export class DemoInfoComponent implements OnInit {
     this.dialogRef.close();
   }
 
-  public showDemoDate() {
-    this.matDialog.open(DemoDateComponent, {data: {}, width : '50%'});
+  public showDemoDate(f: NgForm) {
+    this.matDialog.open(DemoDateComponent, {data: {form: f}, width : '50%'});
   }
 
-  public onSubmit() {
+  public onSubmit(f: NgForm) {
     this.dialogRef.close();
-    this.showDemoDate();
+    this.showDemoDate(f);
   }
 
 }
