@@ -58,7 +58,6 @@ def list_events(calendarId):
     service = get_calendar_service()
     # Call the Calendar API
     now = datetime.datetime.utcnow().isoformat() + 'Z'  # 'Z' indicates UTC time
-    print('Getting List o 10 events')
     events_result = service.events().list(
         calendarId=calendarId, timeMin=now,
         maxResults=4, singleEvents=True,

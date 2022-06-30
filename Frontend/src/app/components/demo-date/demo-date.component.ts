@@ -40,8 +40,20 @@ export class DemoDateComponent implements OnInit {
   }
 
   public onSubmit(f: NgForm) {
-    console.log(this.email);
-    console.log(f.value);
+    const form = {
+      client: {
+        firstName: this.fName,
+        lastName: this.lName,
+        phone: this.phone,
+        email: this.email,
+      },
+      demo: {
+        service: this.service,
+        event_id: f.value.demoId,
+      }
+    };
+    this.demoService.addDemoRequest(form).subscribe();
+    this.closeDialog();
   }
 
 

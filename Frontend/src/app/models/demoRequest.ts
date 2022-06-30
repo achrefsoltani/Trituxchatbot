@@ -1,8 +1,12 @@
 export interface DemoRequest {
-  fName: string;
-  lName: string;
-  phone: string;
-  email: string;
-  service: string;
-  eventId: string;
+  client: {
+    firstName: string
+    lastName: string;
+    phone: string;
+    email: string;
+  };
+  demo: {
+    service: string;
+    event_id: string;
+  };
 }
