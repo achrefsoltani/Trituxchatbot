@@ -1,6 +1,6 @@
 from django.http import HttpResponse
 from django.shortcuts import render, redirect
-from .models import Chat, Message, Choice, ContactRequest
+from .models import Chat, Message, Choice, ContactRequest, DemoRequest
 import pandas as pd
 import datetime
 import plotly.express as px
@@ -33,6 +33,23 @@ def main_view(request):
     davg = df['chat_id'].value_counts().rename_axis('chat_id').reset_index(name='counts')
     avgMsg = round(davg['counts'].mean())
 
+    # Contact Requests
+    cr_df = create_cr_df()
+    past30 = today - datetime.timedelta(days=30)
+    avgRt = cr_df['responseTime'].mean().days
+    cr_df["created_at"] = pd.to_datetime(cr_df["created_at"]).dt.tz_localize(None)
+    cr_df["cr_date"] = cr_df['created_at'].dt.date
+    cr_df_filtered = cr_df[(cr_df['cr_date'] >= past30) & (cr_df['cr_date'] <= today)]
+    monthCr = len(cr_df_filtered)
+    cr_waiting = len(cr_df_filtered[cr_df_filtered['status'] == 'unclaimed'])
+
+    # Demo Requests
+    dr_df = create_dr_df()
+    dr_df["created_at"] = pd.to_datetime(dr_df["created_at"]).dt.tz_localize(None)
+    dr_df["cr_date"] = dr_df['created_at'].dt.date
+    dr_df_filtered = dr_df[(dr_df['cr_date'] >= past30) & (dr_df['cr_date'] <= today)]
+    monthDr = len(dr_df_filtered)
+
     context = {
         'barchart': barchart,
         'totalInt': totalInt,
@@ -41,7 +58,11 @@ def main_view(request):
         'englishInt': englishIntTotal,
         'frenchIntWeek': frenchIntWeek,
         'englishIntWeek': englishIntWeek,
-        'avgMessages': avgMsg
+        'avgMessages': avgMsg,
+        'avgResponseTime': avgRt,
+        'monthContactRequests': monthCr,
+        'waitingCRequests': cr_waiting,
+        'monthDemoRequests': monthDr,
     }
 
     return render(request, 'home/index.html', context=context)
@@ -67,6 +88,15 @@ def create_df():
 
     return df
 
+def create_cr_df():
+    cr = ContactRequest.objects.all().values()
+    df = pd.DataFrame(cr)
+    return df
+
+def create_dr_df():
+    dr = DemoRequest.objects.all().values()
+    df = pd.DataFrame(dr)
+    return df
 
 def change_status_view(request, id):
     cr = ContactRequest.objects.get(id=id)
