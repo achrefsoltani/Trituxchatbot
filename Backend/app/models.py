@@ -2,13 +2,9 @@ import datetime
 
 from django.db import models
 from django.contrib.auth import get_user_model
-from app.api.calendar import get_event
+
 
 # Chatbot Model
-from django.shortcuts import redirect
-from django.utils.html import format_html
-from django.urls import reverse
-
 
 class Chatbot(models.Model):
     name = models.CharField(max_length=80, blank=True, null=True)
@@ -16,8 +12,6 @@ class Chatbot(models.Model):
 
     def __str__(self):
         return self.name
-    # respond to choice
-    # respond to text
 
 
 # Choice Model
@@ -51,17 +45,10 @@ class Message(models.Model):
 class Chat(models.Model):
     language = models.CharField(max_length=2, choices=[('fr', 'Francais'), ('en', 'English')], null=True)
     date = models.DateTimeField(auto_now_add=True, null=True)
-    # chatbot = models.CharField(max_length=80, blank=True, null=True)
     user = models.CharField(max_length=80, blank=True, null=True)
-
-    # user_feedback = models.CharField(max_length=80, blank=True, null=True)
-    # status = models.CharField(max_length=80, blank=True, null=True)
 
     def __str__(self):
         return "Chat started at %s:%s:%s" % (self.date.hour, self.date.minute, self.date.second)
-
-    # Receive_Message
-    # Change status
 
 
 # Client Model

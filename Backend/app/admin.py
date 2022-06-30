@@ -28,7 +28,7 @@ class MessageInlineAdmin(admin.TabularInline):
 
 @admin.register(Chat)
 class ChatAdmin(admin.ModelAdmin):
-    list_display = ('id', 'date', 'language', 'user', 'number_of_messages')
+    list_display = ('id', 'date', 'language', 'number_of_messages')
     inlines = [MessageInlineAdmin]
     readonly_fields = ['date', 'language']
 
@@ -102,7 +102,7 @@ class ContactRequest(admin.ModelAdmin):
 
 @admin.register(Client)
 class Client(admin.ModelAdmin):
-    list_display = ('lastName', 'firstName', 'email', 'phone')
+    list_display = ('id','lastName', 'firstName', 'email', 'phone')
 
 
 @admin.register(DemoRequest)
