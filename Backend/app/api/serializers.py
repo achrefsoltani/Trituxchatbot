@@ -1,6 +1,6 @@
 from rest_framework import serializers
 from app.models import Choice, Chat, Message, Client, ContactRequest, DemoRequest, Demo
-
+from app.api.calendar import get_event
 
 class ChoiceSerializer(serializers.ModelSerializer):
     class Meta:
@@ -66,6 +66,11 @@ class DemoRequestSerializer(serializers.ModelSerializer):
         model = DemoRequest
         fields = '__all__'
 
+    def get_date(self, calendarId, eventId):
+        event = get_event(calendarId=calendarId, eventId=eventId)
+        print(event)
+        return event
+
     def create(self, validated_data):
         client_data = validated_data.pop('client')
         demo_data = validated_data.pop('demo')
@@ -84,3 +89,4 @@ class DemoRequestSerializer(serializers.ModelSerializer):
         instance.demo = demo
         instance.save()
         return instance
+

@@ -17,6 +17,7 @@ export class DemoDateComponent implements OnInit {
   private email: string;
   private lName: string;
   private phone: string;
+  private date: string;
 
   constructor(private dialogRef: MatDialogRef<DemoDateComponent>,
               @Inject(MAT_DIALOG_DATA) public data: any,
@@ -40,6 +41,13 @@ export class DemoDateComponent implements OnInit {
   }
 
   public onSubmit(f: NgForm) {
+    console.log(this.demos);
+    for (const demo of this.demos) {
+      if (demo.id === f.value.demoId) {
+        this.date = demo.start.dateTime;
+      }
+    }
+
     const form = {
       client: {
         firstName: this.fName,
@@ -49,6 +57,7 @@ export class DemoDateComponent implements OnInit {
       },
       demo: {
         service: this.service,
+        date : this.date,
         event_id: f.value.demoId,
       }
     };

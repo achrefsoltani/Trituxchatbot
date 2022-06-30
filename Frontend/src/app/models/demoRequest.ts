@@ -7,6 +7,7 @@ export interface DemoRequest {
   };
   demo: {
     service: string;
+    date: string;
     event_id: string;
   };
 }

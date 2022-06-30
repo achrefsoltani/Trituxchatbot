@@ -2,6 +2,7 @@ import datetime
 
 from django.db import models
 from django.contrib.auth import get_user_model
+from app.api.calendar import get_event
 
 # Chatbot Model
 from django.shortcuts import redirect
@@ -110,3 +111,6 @@ class Demo(models.Model):
                                blank=True)
     date = models.DateTimeField(null=True, blank=True)
     event_id = models.CharField(max_length=200, blank=True, null=True)
+
+    def __str__(self):
+        return self.get_service_display() + ' , ' + self.date.strftime("%m/%d/%Y, %H:%M:%S")
