@@ -67,6 +67,14 @@ def list_events(calendarId):
 
     return events
 
+def get_event(calendarId, eventId):
+    service = get_calendar_service()
+    event_result = service.events().get(
+        calendarId=calendarId, eventId=eventId
+    ).execute()
+
+    return event_result
+
 def create_event():
     # creates one hour event tomorrow 10 AM IST
     service = get_calendar_service()
@@ -96,28 +104,21 @@ def update_event(calendarId, eventId, email):
     # update the event to tomorrow 9 AM IST
     service = get_calendar_service()
 
-    d = datet.now().date()
-    tomorrow = datet(d.year, d.month, d.day, 9) + timedelta(days=1)
-    start = tomorrow.isoformat()
-    end = (tomorrow + timedelta(hours=2)).isoformat()
+    event = get_event(calendarId, eventId)
+    if "attendees" in event.keys():
+        email_list = event["attendees"]
+        email_list.append({"email": email})
+    else:
+        email_list = [{"email": email}]
 
-    event_result = service.events().update(
+    event_result = service.events().patch(
         calendarId=calendarId,
         eventId=eventId,
         body={
-            "summary": 'Updated Automating calendar',
-            "description": 'This is a tutorial example of automating google calendar with python, updated time.',
-            "start": {"dateTime": start, "timeZone": 'Asia/Kolkata'},
-            "end": {"dateTime": end, "timeZone": 'Asia/Kolkata'},
-            "attendees": [{"email": email}]
+            "attendees": email_list
         },
     ).execute()
 
-    print("updated event")
-    print("id: ", event_result['id'])
-    print("summary: ", event_result['summary'])
-    print("starts at: ", event_result['start']['dateTime'])
-    print("ends at: ", event_result['end']['dateTime'])
 
 
 

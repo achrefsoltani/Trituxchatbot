@@ -103,9 +103,17 @@ class DemoRequestApiView(APIView):
     # Create New DemoRequest and/or Client
 
     def post(self, request):
+        calendarId = None
         serializer = DemoRequestSerializer(data=request.data)
         if serializer.is_valid():
-            # Code to add client to event
+            id = request.data['demo']['service']
+            if id == 1:
+                calendarId = '9pnkofdjft4o57nlhi71oohbts@group.calendar.google.com'
+            elif id == 2:
+                calendarId = 'qkk3lcmogn69kc82jviqp4gnqs@group.calendar.google.com'
+            elif id == 3:
+                calendarId = 'evq2mpfdjsq600i2aqcgaudjq8@group.calendar.google.com'
+            update_event(calendarId,request.data['demo']['event_id'],request.data['client']['email'])
             serializer.save()
             return Response(serializer.data, status=status.HTTP_200_OK)
 
