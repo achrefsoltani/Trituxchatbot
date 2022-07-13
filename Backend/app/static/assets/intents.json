@@ -1,0 +1,224 @@
+{
+  "intents": [
+    {
+      "tag": "greeting",
+      "patterns": [
+        "Hi there",
+        "How are you",
+        "Is anyone there?",
+        "Hey",
+        "Hola",
+        "Hello",
+        "Good day",
+        "Namaste",
+        "yo",
+        "hi",
+        "Good day"
+      ],
+      "responses": [
+        "Hello",
+        "Hi there, how can I help?",
+        "Hello, thanks for checking in.",
+        "Hello, thanks for visiting."
+      ]
+    },
+    {
+      "tag": "goodbye",
+      "patterns": [
+        "cya",
+        "see you",
+        "bye bye",
+        "See you later",
+        "Goodbye",
+        "I am Leaving",
+        "Bye",
+        "Have a Good day",
+        "talk to you later",
+        "i got to go",
+        "gtg"
+      ],
+      "responses": [
+        "Talk to you later.",
+        "Goodbye!",
+        "Come back soon.",
+        "See you later, thanks for visiting.",
+        "Have a nice day.",
+        "Bye! Come back again soon.",
+        "Have a nice time, welcome back again."
+      ]
+    },
+    {
+      "tag": "creator",
+      "patterns": [
+        "what is the name of your developers",
+        "what is the name of your creators",
+        "what is the name of the developers",
+        "what is the name of the creators",
+        "who created you",
+        "your developers",
+        "your creators",
+        "who are your developers",
+        "developers",
+        "you are made by",
+        "you are made by whom",
+        "who created you",
+        "who create you",
+        "creators",
+        "who made you",
+        "who designed you"
+      ],
+      "responses": [
+        "I was developed by a Tritux intern for his end of studies project."
+      ]
+    },
+    {
+      "tag": "name",
+      "patterns": [
+        "name",
+        "your name",
+        "do you have a name",
+        "what are you called",
+        "what is your name",
+        "what should I call you",
+        "whats your name?",
+        "what are you",
+        "who are you",
+        "who is this",
+        "what am i chatting to",
+        "who am i taking to",
+        "what are you"
+      ],
+      "responses": [
+        "I'm just a chat agent. I only exist in the internet."
+      ]
+    },
+    {
+      "tag": "location",
+      "patterns": [
+        "What is your location?",
+        "Where are you located?",
+        "What is your address?",
+        "Where is your company situated?"
+      ],
+      "responses": [
+        "We are on Residence les Jardins du Lac, Immeuble Idriss, Les Berges du Lac 2, 1053 Tunis.",
+        "Our company is situated in Residence les Jardins du Lac, Immeuble Idriss, Les Berges du Lac 2, 1053 Tunis.",
+        "We work from Residence les Jardins du Lac, Immeuble Idriss, Les Berges du Lac 2, 1053 Tunis.",
+        "Our location is Residence les Jardins du Lac, Immeuble Idriss, Les Berges du Lac 2, 1053 Tunis."
+      ]
+    },
+    {
+      "tag": "thanks",
+      "patterns": [
+        "Thanks",
+        "Thank you",
+        "That's helpful",
+        "Awesome, thanks",
+        "Thanks for helping me"
+      ],
+      "responses": [
+        "Happy to help!",
+        "Any time!",
+        "My pleasure.",
+        "you're welcome."
+      ]
+    },
+
+    {
+      "tag": "whatsup",
+      "patterns": [
+        "Whats up",
+        "Wazzup",
+        "How are you",
+        "sup",
+        "How you doing"
+      ],
+      "responses": [
+        "All good..What about you?"
+      ]
+    },
+    {
+      "tag": "haha",
+      "patterns": [
+        "haha",
+        "lol",
+        "rofl",
+        "lmao",
+        "that's funny"
+      ],
+      "responses": ["Glad I could make you laugh !"]
+    },
+    {
+      "tag": "solutions",
+      "patterns": [],
+      "responses": []
+    },
+    {
+      "tag": "services",
+      "patterns": [],
+      "responses": []
+    },
+    {
+      "tag": "tritux",
+      "patterns": [],
+      "responses": []
+    },
+    {
+      "tag": "goals",
+      "patterns": [],
+      "responses": []
+    },
+    {
+      "tag": "commitment",
+      "patterns": [],
+      "responses": []
+    },
+    {
+      "tag": "values",
+      "patterns": [],
+      "responses": []
+    },
+    {
+      "tag": "recruitment",
+      "patterns": [],
+      "responses": []
+    },
+    {
+      "tag": "demo",
+      "patterns": [],
+      "responses": []
+    },
+    {
+      "tag": "contact",
+      "patterns": [
+        "How can we contact you ?",
+        "How can I contact you?",
+        "contact info",
+        "Can i get your phone number",
+        "how can i call you",
+        "phone number",
+        "phone no",
+        "call"
+      ],
+      "responses": [
+        "You can contact at +21671196049 , +33(01)77627883 , info@tritux.com or use the contact button at the bottom."
+      ]
+    },
+    {
+      "tag": "lang",
+      "patterns": [
+        "  What language are you written in? "
+      ],
+      "responses": [
+        " Python.",
+        " I am written in Python."
+      ]
+    },
+
+    {
+      "tag": "",
+      "patterns": [],
+      "responses": []
+    }
+  ]
+}

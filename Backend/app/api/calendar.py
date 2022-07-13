@@ -4,7 +4,6 @@ from datetime import datetime as datet
 import pickle
 import os.path
 
-
 from googleapiclient.discovery import build
 from google_auth_oauthlib.flow import InstalledAppFlow
 from google.auth.transport.requests import Request
@@ -14,29 +13,31 @@ SCOPES = ['https://www.googleapis.com/auth/calendar']
 
 CREDENTIALS_FILE = 'app/static/assets/credentialsDesktop.json'
 
+
 def get_calendar_service():
-   creds = None
-   # The file token.pickle stores the user's access and refresh tokens, and is
-   # created automatically when the authorization flow completes for the first
-   # time.
-   if os.path.exists('token.pickle'):
-       with open('token.pickle', 'rb') as token:
-           creds = pickle.load(token)
-   # If there are no (valid) credentials available, let the user log in.
-   if not creds or not creds.valid:
-       if creds and creds.expired and creds.refresh_token:
-           creds.refresh(Request())
-       else:
-           flow = InstalledAppFlow.from_client_secrets_file(
-               CREDENTIALS_FILE, SCOPES)
-           creds = flow.run_local_server(port=0)
+    creds = None
+    # The file token.pickle stores the user's access and refresh tokens, and is
+    # created automatically when the authorization flow completes for the first
+    # time.
+    if os.path.exists('token.pickle'):
+        with open('token.pickle', 'rb') as token:
+            creds = pickle.load(token)
+    # If there are no (valid) credentials available, let the user log in.
+    if not creds or not creds.valid:
+        if creds and creds.expired and creds.refresh_token:
+            creds.refresh(Request())
+        else:
+            flow = InstalledAppFlow.from_client_secrets_file(
+                CREDENTIALS_FILE, SCOPES)
+            creds = flow.run_local_server(port=0)
 
-       # Save the credentials for the next run
-       with open('token.pickle', 'wb') as token:
-           pickle.dump(creds, token)
+        # Save the credentials for the next run
+        with open('token.pickle', 'wb') as token:
+            pickle.dump(creds, token)
 
-   service = build('calendar', 'v3', credentials=creds)
-   return service
+    service = build('calendar', 'v3', credentials=creds)
+    return service
+
 
 def list_calendars():
     service = get_calendar_service()
@@ -54,6 +55,7 @@ def list_calendars():
         primary = "Primary" if calendar.get('primary') else ""
         print("%s\t%s\t%s" % (summary, id, primary))
 
+
 def list_events(calendarId):
     service = get_calendar_service()
     # Call the Calendar API
@@ -66,6 +68,7 @@ def list_events(calendarId):
 
     return events
 
+
 def get_event(calendarId, eventId):
     service = get_calendar_service()
     event_result = service.events().get(
@@ -73,6 +76,7 @@ def get_event(calendarId, eventId):
     ).execute()
 
     return event_result
+
 
 def create_event():
     # creates one hour event tomorrow 10 AM IST
@@ -98,8 +102,8 @@ def create_event():
     print("starts at: ", event_result['start']['dateTime'])
     print("ends at: ", event_result['end']['dateTime'])
 
-def update_event(calendarId, eventId, email):
 
+def update_event(calendarId, eventId, email):
     # update the event to tomorrow 9 AM IST
     service = get_calendar_service()
 
@@ -117,7 +121,3 @@ def update_event(calendarId, eventId, email):
             "attendees": email_list
         },
     ).execute()
-
-
-
-

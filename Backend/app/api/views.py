@@ -8,9 +8,11 @@ from rest_framework.response import Response
 from rest_framework import status
 from rest_framework import permissions
 from app.models import Choice, Message
+from .chatbot import pred_class, get_response
 from .serializers import ChoiceSerializer, ChatSerializer, MessageSerializer, ContactRequestSerializer, \
     DemoRequestSerializer
 from app.api.calendar import list_events
+from app.api.chatbot_model_creation import create_model
 
 
 class ChoiceListApiView(APIView):
@@ -51,12 +53,16 @@ class MessageApiView(APIView):
         serializer = MessageSerializer(data=request.data)
         if serializer.is_valid():
             serializer.save()
-            if (serializer.data['content']):
+            if serializer.data['content']:
+                words, classes, data, model = create_model()
+                message = serializer.data['content']
+                intents = pred_class(message, words, classes)
+                result = get_response(intents, data)
                 # Chatbot response function here / response need to be in message format
                 response = Message(sender='chatbot',
                                    chat_id=serializer.data['chat'],
                                    type='text',
-                                   content='received :' + serializer.data['content'],
+                                   content=result,
                                    date=datetime.datetime.now())
                 # Saving the response in Chat
                 response.save()
