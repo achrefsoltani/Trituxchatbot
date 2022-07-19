@@ -123,7 +123,6 @@
         "you're welcome."
       ]
     },
-
     {
       "tag": "whatsup",
       "patterns": [
@@ -146,47 +145,100 @@
         "lmao",
         "that's funny"
       ],
-      "responses": ["Glad I could make you laugh !"]
+      "responses": [
+        "Glad I could make you laugh !"
+      ]
     },
     {
       "tag": "solutions",
-      "patterns": [],
-      "responses": []
+      "patterns": [
+        "solutions",
+        "which solutions do you offer ?",
+        "what do you specialize in ?",
+        "what can you help with ?",
+        "what does Tritux specialize in ?",
+        "what can Tritux help with ?"
+      ],
+      "responses": [
+        "Tritux offers a variety of solutions : IT solutions, VAS, Roaming, IOT... "
+      ]
     },
     {
       "tag": "services",
-      "patterns": [],
-      "responses": []
+      "patterns": [
+        "services",
+        "what services do you provide ?",
+        "what can i hire you for ?",
+        "services that Tritux provide"
+      ],
+      "responses": [
+        "Tritux provide a broad spectrum of consulting, engineering and analytical services : Integration, Engineering, Consulting, Outsourcing, Operations and Maintenance"
+      ]
     },
     {
       "tag": "tritux",
-      "patterns": [],
-      "responses": []
+      "patterns": [
+        "what is tritux?",
+        "Tritux",
+        "what is this company?",
+        "tell me about tritux"
+      ],
+      "responses": [
+        "TriTUX is an international company specialized in IT engineering, IT consulting and Outsourcing. With more than 13 years of experience, TriTUX is a leading telecommunication IT solutions provider."
+      ]
     },
     {
       "tag": "goals",
-      "patterns": [],
-      "responses": []
+      "patterns": [
+        "goals",
+        "what are your main goals ?",
+        "what are Tritux main goals ?",
+        "what goals do you look to achieve ?",
+        "what does Tritux wish to achieve ?",
+        "what are Tritux objectives ?",
+        "what are your objectives ?"
+      ],
+      "responses": [
+        "Tritux main goals are to :  \n\n* Maintain the highest ethical standards. \n\n* Ensure customer satisfaction by delivering quality services and value.\n\n* Recruit and retain highly educated, motivated and productive workforce committed to building and sustaining professional relationships based on integrity and trust.\n\n* Establish and maintain strong collaborative relationships with companies holding similar visions, missions and values.\n"
+      ]
     },
     {
       "tag": "commitment",
-      "patterns": [],
-      "responses": []
+      "patterns": [
+        "commitment",
+        "what are your commitments ?",
+        "what are Tritux commitments ?",
+        "what are you commited to ?",
+        "what is Tritux commited to ?"
+      ],
+      "responses": [
+        "Tritux main commitments are : \n\n* Performance : We aim high, set ambitious goals and deliver results.We move quickly and make timely, well-reasoned decisions \n\n* Opportunities : Our employees ideas and inspiration create unlimited opportunities constantly. We improve continuously everything we do, as a company and as individuals. \n\n* Results : We meet aggressive targets in tough economic environment."
+      ]
     },
     {
       "tag": "values",
-      "patterns": [],
-      "responses": []
+      "patterns": [
+        "values",
+        "what are your values ?",
+        "what are Tritux values ?",
+        "can you tell me about Tritux values ?",
+        "can you tell me about your values ?"
+      ],
+      "responses": [
+        "Tritux has and will always value \n\n* Excellence : Embracing Excellence leads us to challenge ourselves to execute flawlessly and to consistently deliver the highest quality of service. \n\n* Responsibility : We maintain the highest ethical, environmental and safety standards everywhere, and we encourage and celebrate our employees’ active roles in their communities. \n\n* Innovation : We are a company of ideas that are nurtured by a commitment to research and development. We seek and share ideas openly."
+      ]
     },
     {
       "tag": "recruitment",
-      "patterns": [],
-      "responses": []
-    },
-    {
-      "tag": "demo",
-      "patterns": [],
-      "responses": []
+      "patterns": [
+        "is Tritux recruiting ?",
+        "how can i apply for Tritux ?",
+        "i want to join Tritux",
+        "where do i apply for a job in Tritux ?"
+      ],
+      "responses": [
+        "Anyone wishing to join Tritux can apply in the carriere section and follow us on Linkedin to see our latest job offers. "
+      ]
     },
     {
       "tag": "contact",
@@ -214,7 +266,6 @@
         " I am written in Python."
       ]
     },
-
     {
       "tag": "",
       "patterns": [],
